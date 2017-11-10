@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style>
+    .img {
+      width: 30%;
+      display: inline-block;
+    }
+
+      .right {
+        float: right;
+      }
+    #client_logos {
+      display: inline-block;
+      width:100%;
+    }
+
+      .center {
+        text-align: center;
+      }
+
+      .text-bold {
+        font-weight: bold;
+      }
+  </style>
+
+</head>
+<body>
+<div class="container">
+  <div id="client_logos">
+    <%= image_tag attachments['slogan.png'].url, class: 'img' %>
+    <%= image_tag attachments['slogan2.png'].url, class: 'img right' %>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p>
+        Estimado Cliente AvancExpress<br>
+      </p>
+      <p>
+      <span class="text-bold">¡Has confirmado tu correo electrónico con éxito!</span> Da click en el siguiente enlace para completar tu registro y empezar
+        a disfrutar de los beneficios que AvancExpress tiene para ti:<br><br>
+      </p>
+      <p class="center">
+        <%= @url %>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+</html>

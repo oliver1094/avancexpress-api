@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  payment_date: 2017-11-09
+  before_nomina: 9.99
+  comision: 9.99
+  interes: 9.99
+  iva: 9.99
+  payment_total: 9.99
+  client: one
+
+two:
+  payment_date: 2017-11-09
+  before_nomina: 9.99
+  comision: 9.99
+  interes: 9.99
+  iva: 9.99
+  payment_total: 9.99
+  client: two

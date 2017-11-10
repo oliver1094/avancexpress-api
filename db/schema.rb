@@ -10,7 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102150050) do
+ActiveRecord::Schema.define(version: 20171110165515) do
+
+  create_table "address_clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "street_number"
+    t.string "cp"
+    t.string "state"
+    t.string "city"
+    t.string "municipio"
+    t.string "colonia"
+    t.bigint "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_address_clients_on_client_id"
+  end
+
+  create_table "client_loan_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.date "payment_date"
+    t.decimal "before_nomina", precision: 10, scale: 2
+    t.decimal "comision", precision: 10, scale: 2
+    t.decimal "interes", precision: 10, scale: 2
+    t.decimal "iva", precision: 10, scale: 2
+    t.decimal "payment_total", precision: 10, scale: 2
+    t.bigint "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_client_loan_details_on_client_id"
+  end
+
+  create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "name"
+    t.string "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "motive"
+    t.string "phone"
+    t.date "birth_date"
+    t.string "rfc"
+    t.string "curp"
+    t.string "client_key"
+    t.bigint "user_id"
+    t.string "last_name_two"
+    t.string "name_two"
+    t.index ["user_id"], name: "index_clients_on_user_id"
+  end
+
+  create_table "file_clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "name"
+    t.bigint "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_file_clients_on_client_id"
+  end
 
   create_table "oauth_access_grants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "resource_owner_id", null: false
@@ -66,9 +117,14 @@ ActiveRecord::Schema.define(version: 20171102150050) do
     t.bigint "type_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_active"
     t.index ["type_user_id"], name: "index_users_on_type_user_id"
   end
 
+  add_foreign_key "address_clients", "clients"
+  add_foreign_key "client_loan_details", "clients"
+  add_foreign_key "clients", "users"
+  add_foreign_key "file_clients", "clients"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "users", "type_users"

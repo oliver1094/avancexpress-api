@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  street_number: MyString
+  cp: MyString
+  state: MyString
+  city: MyString
+  municipio: MyString
+  colonia: MyString
+  client: one
+
+two:
+  street_number: MyString
+  cp: MyString
+  state: MyString
+  city: MyString
+  municipio: MyString
+  colonia: MyString
+  client: two
