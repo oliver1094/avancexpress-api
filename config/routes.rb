@@ -19,6 +19,8 @@ Rails.application.routes.draw do
           post 'preregister' => 'clients#preregister'
           post 'register' => 'clients#register'
           post 'upload_files' => 'clients#upload_files'
+          get 'get_client_files' => 'clients#get_client_files'
+          get 'get_clients' => 'clients#get_clients'
         end
       end
     end

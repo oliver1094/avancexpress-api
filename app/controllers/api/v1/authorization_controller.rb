@@ -14,7 +14,7 @@ class Api::V1::AuthorizationController < ApplicationController
                                                                 scopes: app_production.scopes, use_refresh_token: false,
                                                                 expires_in: nil)
 
-      render :json => {user: {id: user.id, email: user.email,
+      render :json => {user: {id: user.id, email: user.email, client_id: user.client ? user.client.id : '',
                               type_user: {
                                   id: user.type_user.id,
                                   name: user.type_user.name

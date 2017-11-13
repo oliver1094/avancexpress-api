@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'contacto@avancexpress.com.mx'
+  default from: 'notification@avancexpress.com.mx'
 
   def welcome_email(user, client)
     @user = user
@@ -9,4 +9,12 @@ class UserMailer < ApplicationMailer
     attachments.inline["slogan2.png"] = File.read("#{Rails.root}/public/images/slogan10.png")
     mail(to: @user.email, subject: 'Confirmación de datos')
   end
+
+
+  # send a signup email to the user, pass in the user object that   contains the user's email address
+  def send_signup_email()
+    mail( :to => 'j.padilla.chi@gmail.com',
+          :subject => 'Thanks for signing up for our amazing app' )
+  end
+
 end

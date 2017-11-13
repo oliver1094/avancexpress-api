@@ -1,6 +1,6 @@
 class Api::V1::ClientsController < ApplicationController
 
-  before_action :doorkeeper_authorize!, :except => [:preregister, :get_client, :register, :upload_files]
+  before_action :doorkeeper_authorize!, :except => [:preregister, :get_client, :register]
 
   def index
     @clients = Client.all
@@ -23,6 +23,7 @@ class Api::V1::ClientsController < ApplicationController
       @client.phone = @dataClient[:phone]
       @client.motive = @dataClient[:motive]
       @client.client_key = SecureRandom.hex 32
+      @client.status = 'rejected'
       @client.user_id = @user.id
       if @client.save
         params = @dataPrestamo
@@ -101,21 +102,48 @@ class Api::V1::ClientsController < ApplicationController
 
   def upload_files
 
-    @email = params[:client_email]
-    @files = params[:files]
-    @user = User.find_by_email(@email)
-    @client = @user.client
+    @file = params[:file]
+    @client = Client.find(params[:client_id])
+    @file_client = FileClient.new
+    @file_client.client_id = @client.id
+    @file_client.name = @file
 
+    if @file_client.save
+      if !@file_client.name.file.nil?
+        render json: {file: @file_client.name}
+      else
+        render json: {message: 'Error al subir el archivo'}
+      end
 
-    @files.each do |file|
-      # attach loaded data to the person object in controller
-      client_files = FileClient.new
-      client_files.name = file
-      client_files.client_id = @client.id
-      client_files.save
     end
 
-    render json: {client: @client}
+  end
+
+  def get_client_files
+    client_id = params[:client_id]
+    client = Client.find(client_id)
+    files = client.file_clients
+    @file_array ||= []
+    files.each do |file|
+      @file_array.push({
+                           name: file.name_identifier,
+                           url: file.name.url
+                       })
     end
+    render json: {files: @file_array}
+  end
+
+  def get_clients
+    clients = Client.all
+    client_array ||= []
+    clients.each do |client|
+      client_array.push({
+                            client: client,
+                            client_loan_details: client.client_loan_details,
+                            client_address: client.address_client
+                        })
+    end
+    render json: {clients: client_array}
+  end
 
 end
