@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates_presence_of :password_confirmation, :if => :password_changed?, :on => :create
   attr_accessor :change_password
 
-  #validates :email, uniqueness: true
+  validates :email, uniqueness: true
   validates :password, presence: true, :on => :update, if: :change_password
   validates_confirmation_of :password, :on => :update, if: :change_password
 
