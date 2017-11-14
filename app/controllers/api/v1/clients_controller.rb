@@ -3,7 +3,7 @@ class Api::V1::ClientsController < ApplicationController
   before_action :doorkeeper_authorize!, :except => [:preregister, :get_client, :register]
 
   def index
-    @clients = Client.all
+    @clients = Client.where(status: 'pending').order(created_at: :desc)
     render :index
   end
 
@@ -21,9 +21,11 @@ class Api::V1::ClientsController < ApplicationController
       @client.name = @dataClient[:name]
       @client.last_name = @dataClient[:last_name]
       @client.phone = @dataClient[:phone]
+      @client.telfijo = @dataClient[:telfijo]
+      @client.monto = @dataClient[:monto]
       @client.motive = @dataClient[:motive]
       @client.client_key = SecureRandom.hex 32
-      @client.status = 'rejected'
+      @client.status = 'pending'
       @client.user_id = @user.id
       if @client.save
         params = @dataPrestamo
@@ -144,6 +146,23 @@ class Api::V1::ClientsController < ApplicationController
                         })
     end
     render json: {clients: client_array}
+  end
+
+  def change_status_loan
+    status = params[:status]
+    client_id = params[:client_id]
+    client = Client.find(client_id)
+    if status
+      client.status = 'accepted'
+    else
+      client.status = 'rejected'
+    end
+
+    if client.save
+      render json: {
+          message: success
+      }
+    end
   end
 
 end

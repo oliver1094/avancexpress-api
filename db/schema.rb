@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113055941) do
+ActiveRecord::Schema.define(version: 20171114035439) do
 
   create_table "address_clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "street_number"
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 20171113055941) do
     t.string "last_name_two"
     t.string "name_two"
     t.string "status"
+    t.string "telfijo"
+    t.string "monto"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
