@@ -21,6 +21,7 @@ Rails.application.routes.draw do
           post 'upload_files' => 'clients#upload_files'
           get 'get_client_files' => 'clients#get_client_files'
           get 'get_clients' => 'clients#get_clients'
+          post 'change_status_loan' => 'clients#change_status_loan'
         end
       end
     end

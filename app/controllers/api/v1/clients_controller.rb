@@ -7,6 +7,21 @@ class Api::V1::ClientsController < ApplicationController
     render :index
   end
 
+  def create_pdf
+    #pdf = WickedPdf.new.pdf_from_string('<h1>Hello There!</h1>')
+    pdf = WickedPdf.new.pdf_from_string(
+        render_to_string('api/v1/clients/contract.html.erb', layout: false)
+    )
+
+
+    # then save to a file
+    save_path = Rails.root.join('public/uploads','filename.pdf')
+    File.open(save_path, 'wb') do |file|
+      file << pdf
+    end
+  end
+
+
   def preregister
     @dataPrestamo = params[:dataPrestamo]
     @dataClient = params[:dataClient]
@@ -160,7 +175,11 @@ class Api::V1::ClientsController < ApplicationController
 
     if client.save
       render json: {
-          message: success
+          status: true
+      }
+    else
+      render json: {
+          status: false
       }
     end
   end

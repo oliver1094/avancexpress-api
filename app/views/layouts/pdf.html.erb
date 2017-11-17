@@ -1,0 +1,17 @@
+<!-- app/views/layouts/pdf.html.erb -->
+<!doctype html>
+<html>
+<head>
+  <title>PDF</title>
+  <%= wicked_pdf_stylesheet_link_tag "document" %>
+
+</head>
+<body>
+
+<div class='container'>
+  <%= yield %>
+</div>
+
+</body>
+</html>
+
