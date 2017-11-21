@@ -8,6 +8,9 @@ class Api::V1::ClientsController < ApplicationController
   end
 
   def create_pdf
+    @client = Client.find(1)
+    @date = Time.now.strftime("%m/%d/%Y")
+
     #pdf = WickedPdf.new.pdf_from_string('<h1>Hello There!</h1>')
     pdf = WickedPdf.new.pdf_from_string(
         render_to_string('api/v1/clients/contract.html.erb', layout: false)
@@ -19,6 +22,7 @@ class Api::V1::ClientsController < ApplicationController
     File.open(save_path, 'wb') do |file|
       file << pdf
     end
+    render :contract
   end
 
 

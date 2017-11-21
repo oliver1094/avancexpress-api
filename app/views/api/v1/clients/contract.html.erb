@@ -8,22 +8,31 @@
 </head>
 <body>
 
-<div class='container'>
-  <table style="width:100%">
+  <table style="width:100%; padding: 0">
     <tr>
-      <th><img src="https://avancexpress-api.herokuapp.com/images/slogan.png" width="45%"></th>
-      <th class="text-right" style="font-family:'Arial'">Fecha: 12-12-12<br>Folio: 12312312</th>
+      <th><img src="https://avancexpress-api.herokuapp.com/images/slogan.png" width="55%"></th>
+      <th class="text-right"><img src="https://avancexpress-api.herokuapp.com/images/slogan10.png" width="60%"></th>
     </tr>
   </table>
+  <table style="width:100%; padding: 0">
+    <tr>
+      <th><img src="https://avancexpress-api.herokuapp.com/images/slogan.png" width="50%"></th>
+      <th class="text-right">Fecha: <%= @date %><br>Folio: 123456 </th>
+    </tr>
+  </table>
+  <div class="text-center">
+    <img src="https://avancexpress-api.herokuapp.com/images/slogan.png" width="35%">
+  </div>
+  <h2></h2>
   <div class="row">
     <div class="col-sm-4">.col-sm-4</div>
     <div class="col-sm-4">.col-sm-4</div>
-    <div class="col-sm-4">.col-sm-4</div>
+    <div class="col-sm-4"> <%= @client.id %></div>
   </div>
 
 
 
-</div>
+
 
 </body>
 </html>
