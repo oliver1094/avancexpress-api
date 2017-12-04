@@ -16,7 +16,6 @@ class Api::V1::ClientsController < ApplicationController
         render_to_string('api/v1/clients/contract.html.erb', layout: false)
     )
 
-
     # then save to a file
     save_path = Rails.root.join('public/uploads','filename.pdf')
     File.open(save_path, 'wb') do |file|
@@ -171,13 +170,23 @@ class Api::V1::ClientsController < ApplicationController
     status = params[:status]
     client_id = params[:client_id]
     client = Client.find(client_id)
+    client_address = AddressClient.find_by_client_id(client_id)
+    client_loan = ClientLoanDetail.find_by_client_id(client_id)
     if status
       client.status = 'accepted'
+      data_general = params[:client_general]
+      data_general.permit!
+      client.update(data_general)
+      data_address = params[:address_client]
+      data_address.permit!
+      data_loan = params[:loan_detail]
+      data_loan.permit!
+      client_address.update(data_address)
+      client_loan.update(data_loan)
     else
       client.status = 'rejected'
     end
-
-    if client.save
+    if client.save && client_loan.save && client_address.save
       render json: {
           status: true
       }
@@ -186,6 +195,7 @@ class Api::V1::ClientsController < ApplicationController
           status: false
       }
     end
+
   end
 
 end

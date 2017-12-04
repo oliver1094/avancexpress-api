@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114035439) do
+ActiveRecord::Schema.define(version: 20171203224059) do
 
   create_table "address_clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "street_number"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20171114035439) do
     t.bigint "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "request_date"
     t.index ["client_id"], name: "index_client_loan_details_on_client_id"
   end
 
