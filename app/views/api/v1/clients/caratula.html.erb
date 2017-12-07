@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>PDF</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <style>
+    .container {
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+      background-color: aqua;
+    }
+
+    .row {
+      margin-right: -15px;
+      margin-left: -15px;
+    }
+
+      .col-md-6 {
+        float:left;
+        width: 50%;
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+    .col-md-4 {
+      float:left;
+      width: 33.3%;
+      position: relative;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+      .text-color-blue {
+        color: #0e3d89;
+        width: 100px;
+        font-weight: bold;
+        background-color: white;
+      }
+
+      .bg-gray {
+        background-color: #f7f7f9;
+      }
+
+      .bg-gray-s {
+        background-color: #e9ecef;
+      }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6" style="padding-left:50px">
+      <img src="https://avancexpress-api.herokuapp.com/images/slogan.png" width="80%">
+    </div>
+    <div class="col-md-6 text-right">
+      <p style="font-weight: bold"><span class="text-color-blue">FECHA:</span> <%= @date %><br>
+        <span class="text-color-blue">FOLIO: </span>AVNC-001</p>
+    </div>
+  </div>
+</div>
+<table style="width:100%; padding: 0">
+  <tr>
+    <th><img src="https://avancexpress-api.herokuapp.com/images/slogan.png" width="50%"></th>
+    <th>
+      <div class="row">
+        <div class="col-md-4">
+          sdasjdlkasjdsa
+        </div>
+        <div class="col-md-4">
+          aklsdjlaksjdlkasjd
+        </div>
+        <div class="col-md-4">
+          aklsdjlaksjdlkasjd
+        </div>
+      </div>
+    </th>
+  </tr>
+</table>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      sdasjdlkasjdsa
+    </div>
+    <div class="col-md-6 text-right">
+      aklsdjlaksjdlkasjd
+    </div>
+  </div>
+
+</div>
+<table class="table table-striped">
+  <tbody>
+  <tr>
+    <td>
+      <p> <span style="color:black;font-weight: bold;">Monto</span> del Crédito $ <%=@client.monto %></p>
+    </td>
+    <td>
+      segunda columna
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Ssas
+    </td>
+    <td>
+      asasas
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+<div class="row">
+  <div class="col-sm-4">.col-sm-4</div>
+  <div class="col-sm-4">.col-sm-4</div>
+  <div class="col-sm-4"> <%= @client.name %></div>
+</div>
+
+
+</body>
+</html>
+

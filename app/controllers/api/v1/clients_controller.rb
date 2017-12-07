@@ -1,6 +1,6 @@
 class Api::V1::ClientsController < ApplicationController
 
-  before_action :doorkeeper_authorize!, :except => [:preregister, :get_client, :register]
+  before_action :doorkeeper_authorize!, :except => [:create_pdf,:preregister, :get_client, :register]
 
   def index
     @clients = Client.where(status: 'pending').order(created_at: :desc)
@@ -11,9 +11,9 @@ class Api::V1::ClientsController < ApplicationController
     @client = Client.find(1)
     @date = Time.now.strftime("%m/%d/%Y")
 
-    #pdf = WickedPdf.new.pdf_from_string('<h1>Hello There!</h1>')
     pdf = WickedPdf.new.pdf_from_string(
-        render_to_string('api/v1/clients/contract.html.erb', layout: false)
+        render_to_string('api/v1/clients/caratula.html.erb', layout: false,
+                         :margin => { :top => 10, :bottom => 18 , :left => 0 , :right => 0})
     )
 
     # then save to a file
@@ -21,7 +21,7 @@ class Api::V1::ClientsController < ApplicationController
     File.open(save_path, 'wb') do |file|
       file << pdf
     end
-    render :contract
+    render :caratula
   end
 
 
@@ -187,6 +187,7 @@ class Api::V1::ClientsController < ApplicationController
       client.status = 'rejected'
     end
     if client.save && client_loan.save && client_address.save
+      #create_pdf(client)
       render json: {
           status: true
       }
