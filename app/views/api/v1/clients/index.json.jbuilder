@@ -1,6 +1,10 @@
 json.clients @clients do |client|
   json.id client.id
   json.name client.name
+  json.status client.status
+  json.val_first client.val_first
+  json.val_second client.val_second
+  json.val_third client.val_third
   json.user client.user
   json.name_two client.name_two
   json.last_name_two client.last_name_two

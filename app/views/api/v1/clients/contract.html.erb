@@ -1,37 +1,887 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8' />
+  <meta charset='utf-8'/>
   <title>PDF</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <style>
+    .container {
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .row {
+      margin-right: -15px;
+      margin-left: -15px;
+      display: flex;
+    }
+
+    .col-md-6 {
+      width: 50%;
+    }
+
+    .col-md-4 {
+      width: 33.3%;
+    }
+
+    .col-md-3 {
+      width: 25%;
+    }
+
+    .col-md-9 {
+      width: 75%;
+    }
+
+    .col-md-7 {
+      width: 58.3%;
+    }
+
+    .col-md-5 {
+      width: 41.6%;
+    }
+
+    .col-md-12 {
+      width: 100%;
+
+    }
+
+    .col-md-8 {
+      width: 66.6%;
+    }
+
+    .col-md-12, .col-md-3, .col-md-4, .col-md-6, .col-md-9, .col-md-8, .col-md-5, .col-md-7 {
+      float: left;
+      position: relative;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      padding-top: 5px;
+    }
+
+    .text-color-blue {
+      color: #0e3d89;
+      width: 100px;
+      font-weight: bold;
+      background-color: white;
+    }
+
+    .bg-gray {
+      background-color: #f7f7f9;
+    }
+
+    .bg-gray-s {
+      background-color: #e9ecef;
+    }
+
+    .bg-hr {
+      border-top: 1px solid gray;
+    }
+
+    .bg-hr-b {
+      border-top: 1px solid black;
+    }
+
+    .ts-10 {
+      font-size: 10pt;
+    }
+
+    .title-text {
+      color: #0e3d89;
+      font-size: 13pt;
+      font-weight: bold;
+    }
+
+    .text-footer {
+      color: #0e3d89;
+      font-size: 10pt;
+
+    }
+
+    .tx-bold-blue {
+      font-weight: bold;
+      color: #58D3F7;
+    }
+
+    .tx-bold-purple {
+      font-weight: bold;
+      color: #531B93;
+    }
+
+    .tx-bold-purple-t {
+      font-weight: bold;
+      color: #531B93;
+      font-size: 10pt;
+    }
+
+    .tx-bold-green {
+      font-weight: bold;
+      color: #90b900;
+
+    }
+
+    .text-contract {
+      font-size: 8pt;
+      text-align: justify;
+    }
+
+    .tx-bold {
+      font-weight: bold;
+    }
+
+    .tx-footer {
+      font-size: 9pt;
+    }
+
+    .table {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 1rem;
+      background-color: transparent;
+    }
+
+  </style>
 </head>
 <body>
 
-  <table style="width:100%; padding: 0">
-    <tr>
-      <th><img src="https://avancexpress-api.herokuapp.com/images/slogan.png" width="55%"></th>
-      <th class="text-right"><img src="https://avancexpress-api.herokuapp.com/images/slogan10.png" width="60%"></th>
-    </tr>
-  </table>
-  <table style="width:100%; padding: 0">
-    <tr>
-      <th><img src="https://avancexpress-api.herokuapp.com/images/slogan.png" width="50%"></th>
-      <th class="text-right">Fecha: <%= @date %><br>Folio: 123456 </th>
-    </tr>
-  </table>
-  <div class="text-center">
-    <img src="https://avancexpress-api.herokuapp.com/images/slogan.png" width="35%">
+<table style="width:100%; padding: 0; margin:0">
+  <tr>
+    <th style="padding-left:65px; padding-top:56px">
+      <img src="https://avancexpress-api.herokuapp.com/images/slogan.png" width="55%"></th>
+    <th class="text-right" style="padding-right: 35px">
+      <img src="https://avancexpress-api.herokuapp.com/images/slogan10.png" width="60%"></th>
+  </tr>
+</table>
+
+<div class="row" style="padding-top:25px">
+  <div class="col-md-12 text-center">
+    <h3 class="title-text">CONTRATO DE APERTURA DE CREDITO SIMPLE</h3>
   </div>
-  <h2></h2>
-  <div class="row">
-    <div class="col-sm-4">.col-sm-4</div>
-    <div class="col-sm-4">.col-sm-4</div>
-    <div class="col-sm-4"> <%= @client.id %></div>
+</div>
+
+
+<div class="row text-contract" style="padding: 10px">
+  <div class="col-md-6" style="padding-left:55px">
+    <p>QUE CELEBRAN, POR UNA PARTE, AVANCEXPRESS CONTIGO, S de R.L. de C.V. A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ COMO
+      EL "ACREDITANTE", Y POR LA OTRA, BAJO EL CARÁCTER DE ACREDITADO,
+      <%= @client.name.upcase + ' ' + @client.name_two.upcase + ' ' + @client.last_name.upcase + ' ' + @client.last_name_two.upcase %>
+      , A QUIEN EN
+      LO SUCESIVO SE LE DENOMINARÁ COMO EL "ACREDITADO"; DE CONFORMIDAD CON LOS ANTECEDENTES, DECLARACIONES,
+      DEFINICIONES Y CLÁUSULAS SIGUIENTES:</p>
+    <p class="tx-bold-purple-t text-center">--ANTECEDENTES--</p>
+    <p>
+      <span class="tx-bold-blue">PRIMERO.</span> El ACREDITADO requirió al ACREDITANTE, el otorgamiento de un crédito
+      simple, en moneda nacional (en lo
+      sucesivo el "Crédito").<br><br>
+
+      <span class="tx-bold-green">SEGUNDO.</span> El ACREDITANTE, previa revisión y análisis de la información y
+      documentación que fuera proporcionada y
+      presentada por el ACREDITADO por medio del sitio, página web, sitio web o página de internet, así como cualquier
+      subdominio o página referenciada propiedad de AvancExpress Contigo, cuyo nombre de dominio es
+      www.avancexpress.com.mx (conjuntamente el "Sitio"), o bien mediante solicitud personal en cualquiera de las
+      sucursales de “EL ACREDITANTE” autorizó la Solicitud a favor del ACREDITADO.<br><br>
+
+      <span class="tx-bold-purple">TERCERA.</span> El cuadro informativo contenido en la Carátula y la Tabla de
+      Amortización, precisa, cierta información
+      relativa al acreditado (la "Información del Crédito"), aplicable al Contrato:
+
+    </p>
+
+    <p class="tx-bold-purple-t text-center">--DECLARACIONES--</p>
+    <p>
+      <span class="tx-bold-blue">PRIMERA.</span> Expone el <span class="tx-bold">ACREDITANTE</span>, que:<br><br>
+
+      a. Es una persona moral debidamente constituida en sociedad bajo la denominación AvancExpress contigo, válidamente
+      existente, actuando de conformidad a la legislación aplicable y supletoria de los Estados Unidos Mexicanos, según
+      consta en la Escritura Pública Número cuatrocientos setenta y ocho en la ciudad del Carmen del Estado de Campeche
+      a los seis días del mes de septiembre del año dos mil diecisiete otorgada ante la fe del Notario Público número
+      trece del Estado de Campeche y, estar debidamente inscrita en el Registro Público de la Propiedad y del Comercio
+      de la Ciudad del Carmen del Estado de Campeche, bajo el numero 201700173616 y que conforme a su objeto social
+      realiza, entre otras actividades el otorgamiento de prestamos con y sin garantía prendaria, y cuenta con capacidad
+      suficiente para la celebración del
+
+    </p>
+
   </div>
+  <div class="col-md-6" style="padding-left:50px">
+    <p>
+      presente Contrato.
+      b. Para la celebración del presente contrato de apertura de crédito simple (en lo sucesivo el "Contrato") , actúa
+      por medio de su mandatario, quien es la persona moral indicada en la Carátula y el proemio.<br>
+      c. Señala como su domicilio, para los efectos relacionados con el Contrato, el bien inmueble ubicado en la calle
+      San Lucas Número veinticuatro, Colonia Misión del Carmen, de la ciudad del Carmen, Campeche.<br>
+      d. Es su intención otorgar el Crédito al ACREDITADO, conforme a las estipulaciones del Contrato.<br><br>
+
+      <span class="tx-bold-green">SEGUNDA.</span> Expone el ACREDITADO, que:<br><br>
+
+      a. Es una persona física que interviene por su propio derecho en la celebración del Contrato, obligándose bajo los
+      términos que se establecen en el mismo.<br>
+      b. Señala como su domicilio, para los efectos relacionados con el Contrato, el bien inmueble indicado en la
+      Carátula.<br>
+      c. El ACREDITANTE, con anterioridad a la fecha de celebración del Contrato, le proporcionó la Información del
+      Crédito al
+      Acreditado.<br>
+      d. Es su intención que el ACREDITANTE le otorgue el Crédito, conforme a las estipulaciones del presente
+      Contrato.<br>
+      e. La información y documentación que proporcionó y presentó al ACREDITANTE así como la información que asentó en
+      la Caratula, es verdadera y correcta.<br>
+
+      f. Detenta los recursos económicos para el cumplimiento de las obligaciones que, en términos del Contrato, contrae
+      a su cargo, mismos que provienen y provendrán de fuentes lícitas.
+      <br><br>
+      <span class="tx-bold-purple">TERCERA.</span> Exponen el ACREDITANTE y el ACREDITADO, que:
+      a. Se reconocen la capacidad jurídica, personalidad, así como la representación con las que, respectivamente,
+      comparecen para celebrar el Contrato.<br>
+      b. Para el supuesto de intervenir de manera conjunta en diversa estipulación del Contrato, se les denominará como
+      las "PARTES".<br>
+      c. La Carátula, así como la información y documentación que el ACREDITADO proporcionó y presentó al ACREDITANTE,
+      son integrantes, para los efectos conducentes, del Contrato.<br>
+      d. Ambas partes reconocen las comisiones que deban pagar a AvancExpress Contigo como parte integrante del presente
+      Contrato y por ende se obligan a pagar las mismas y/o autorizan a AvancExpress Contigo a que retenga y/o compense
+      dichas comisiones de los pagos realizados en el momento que sea conducente.<br>
+      e. Ambas partes reconocen y acuerdan que este es un contrato entre dos particulares y que no se ha realizado
+
+    </p>
+  </div>
+</div>
+
+<div class="col-md-12" style="padding-left: 65px">
+  <hr class="bg-hr">
+</div>
+<div class="row tx-footer" style="padding-left: 65px">
+  <div class="col-md-4">
+    <p class="tx-bold">www.avancexpress.com.mx</p>
+  </div>
+  <div class="col-md-4">
+    <p><span class="tx-bold-blue">M.</span><span style="display:inline-block; width: 12px;"></span>
+      contacto@avancexpress.com.mx<br>
+      <span class="tx-bold-purple">T.</span><span style="display:inline-block; width: 15px;"></span> 01 (938) 131 4749
+    </p>
+  </div>
+  <div class="col-md-4 text-right">
+    <img src="http://avancexpress.com.mx/assets/images/icon-min.png" width="20%">
+
+  </div>
+</div>
+
+<div class="row text-contract">
+  <div class="col-md-12">
+    <div style="height: 40px"></div>
+  </div>
+  <div class="col-md-6" style="padding-left:65px">
+    <p>
+      ninguna solicitud, ofrecimiento o promoción para la obtención de fondos o recursos de persona indeterminada y
+      por lo tanto, no se está realizando ninguna operación de captación según la Ley de Instituciones de Crédito.<br>
+      f. Ambas partes expresamente acuerdan que el presente Contrato, el Pagaré y todos los derechos y obligaciones
+      derivados de los mismos, no son susceptibles de circular y por ende, ninguno de los documentos y derechos antes
+      mencionados, versan sobre "valores" según se define en la Ley del Mercado de Valores.</p>
+
+    <p class="tx-bold-purple-t text-center">--DEFINICIONES--</p>
+
+    <p>
+      Para efectos del Contrato, las Partes asignan a los términos señalados a continuación, el significado que en cada
+      caso se les atribuye, escritos con letra mayúscula inicial, a menos que el contexto en que se utilicen, implique
+      un concepto diferente y así se indique, independientemente de su utilización en singular o en plural, mismos que
+      serán aplicados en el Contrato.<br><br>
+      <span class="tx-bold">"Carátula".</span> Significa el documento integrante del Contrato, en el que se establecen,
+      la Información del Crédito,
+      así como la información que determina el Contrato y que le es aplicable.<br>
+      <span class="tx-bold">"Día Hábil"</span>. Significa cualquier día de la semana, excluyendo los días sábado y
+      domingo, así como los días en que,
+      conforme a las disposiciones aplicables, las instituciones de crédito deban cerrar sus puertas, suspender
+      operaciones y la prestación de servicios al público.<br>
+      <span class="tx-bold">"Fecha Límite de Pago".</span> Significa el Día Hábil en que el ACREDITADO deberá pagar al
+      ACREDITANTE la respectiva
+      Parcialidad. En caso que alguna Fecha de Pago no sea Día Hábil, el pago de la respectiva Parcialidad, deberá
+      efectuarse el Día Hábil inmediato anterior. De igual forma y tal y como se establece en la Carátula y la tabla de
+      amortización, la Fecha" de Corte" será la misma que se establece como Fecha Límite de Pago.<br>
+      <span class="tx-bold">"IVA de la Tasa de Interés Ordinario del Crédito”.</span> Significa el Impuesto al Valor
+      Agregado que, conforme a las
+      disposiciones legales aplicables es causado sobre el importe de la Tasa de Interés Ordinario del Crédito. El
+      importe del IVA de la Tasa de Interés Ordinario del Crédito será pagado por parte del ACREDITADO.<br>
+      <span class="tx-bold">"IVA de la Tasa de Interés Moratorio del Crédito”.</span> Significa el Impuesto al Valor
+      Agregado que, conforme a las
+      disposiciones legales aplicables es causado sobre el importe de la Tasa de Interés Moratorio del Crédito. El
+      importe del IVA de la Tasa de Interés Moratorio del Crédito será pagado por parte del ACREDITADO.<br>
+
+      <span class="tx-bold">"Monto del Crédito".</span> Significa el importe indicado en la Carátula del monto aprobado
+      y fondeado por el
+      ACREDITANTE. Sobre este monto se calcula la comisión de apertura indicada en la carátula.<br>
+      <span class="tx-bold">"Monto Neto Otorgado".</span> Significa el importe indicado en la Carátula que, respecto del
+      Crédito y, conforme al
+      Contrato, será otorgado al ACREDITADO por el ACREDITANTE, mismo
 
 
+    </p>
 
+
+  </div>
+  <div class="col-md-6" style="padding-left:50px">
+    <p>
+      que es el resultado de restarle al Monto del
+      Crédito las comisiones e IVA.<br>
+      <span class="tx-bold">"Monto Total a Pagar".</span> Significa la adición del importe de la Tasa de Interés
+      Ordinario del Crédito, así como del
+      importe del
+      IVA de la Tasa de Interés Ordinario del Crédito, al Monto del Crédito.
+      El Importe Total del Crédito
+      será el importe que el ACREDITADO debe pagar al ACREDITANTE a través de las Parcialidades. El Importe Total del
+      Crédito se indica en la Carátula.<br>
+      <span class="tx-bold">"Parcialidades".</span> Significan los importes que el ACREDITADO deberá pagar al
+      ACREDITANTE durante la vigencia de este
+      Contrato, para el efecto que sea pagado, en su totalidad, el Monto Total a Pagar. El número de pagos, periodicidad
+      de pago e importe de las Parcialidades, se indican en la Carátula y/o en la Tabla de Amortización.<br>
+      <span class="tx-bold">"Tabla de Amortización".</span> Significa el documento que se Anexa al presente Contrato
+      como Anexo "A" y en el cual se
+      establecen claramente las condiciones del Crédito y su fecha de pago.<br>
+      <span class="tx-bold">"Tasa de Interés Moratorio".</span> Significa el porcentaje fijo mensual indicado en la
+      Carátula, que será multiplicado
+      sobre cualquier importe que el ACREDITADO no pague al ACREDITANTE en forma oportuna y/o completa conforme al
+      Contrato y, cuyo importe resultante, deberá pagarse por el ACREDITADO al ACREDITANTE, en forma inmediata, en Día
+      Hábil y, según sea el caso, junto con el importe que complete el importe no pagado en forma completa. La Tasa de
+      Interés Moratorio será aplicable en tanto no sea pagado el importe de que se trate. La explicación del cálculo del
+      presente interés se incluye en la cláusula segunda siguiente.<br>
+
+      <span class="tx-bold">"Tasa de Interés Ordinario del Crédito".</span> Significa el porcentaje fijo indicado en la
+      Carátula, que será
+      multiplicado sobre el Monto del Crédito y, cuyo importe resultante, deberá pagarse por el ACREDITADO al
+      ACREDITANTE a través de las Parcialidades. El pago de la Tasa de Interés Ordinario del Crédito no podrá ser
+      exigido por adelantado, sino únicamente por periodos vencidos. La explicación del cálculo del presente interés se
+      incluye en la cláusula segunda siguiente. Lo anterior en el claro entendido de que si el ACREDITADO tiene a su
+      disposición cualquier cantidad no amortizada a partir del día uno del periodo, pagará todos los intereses
+      correspondientes a dicho periodo, pudiendo ser cobrados estos intereses en cualquier día del periodo.
+
+      <span class="tx-bold">“Comisión por Apertura”.</span> Significa el importe que hace referencia a los gastos
+      generados por concepto de
+      investigación crediticia, gastos de administración y manejo de cuenta, y misma que será equivalente al 10% del
+      monto del préstamo solicitado.<br><br>
+
+      Asimismo, las PARTES determinan que: (i) el Monto del Crédito; (ii) la Comisión de Apertura; (iii) el Monto Neto
+      Otorgado; (iv) el Monto Total a Pagar; (v) El Plazo del Crédito; (vi) las Parcialidades; (vii) la Tasa de Interés
+      Moratorio; y, (viii) la Tasa de Interés Ordinario del Crédito; establecidos en la Carátula, serán integrantes de
+      la Información del Crédito y, por lo tanto, aplicables y relativos al Crédito.<br><br>
+      En virtud de los ANTECEDENTES, DECLARACIONES y DEFINICIONES anteriores, las PARTES otorgan y se sujetan a las
+      siguientes:
+
+
+    </p>
+  </div>
+</div>
+
+<div class="col-md-12" style="padding-left: 65px">
+  <hr class="bg-hr">
+</div>
+<div class="row tx-footer" style="padding-left: 65px">
+  <div class="col-md-4">
+    <p class="tx-bold">www.avancexpress.com.mx</p>
+  </div>
+  <div class="col-md-4">
+    <p><span class="tx-bold-blue">M.</span><span style="display:inline-block; width: 12px;"></span>
+      contacto@avancexpress.com.mx<br>
+      <span class="tx-bold-purple">T.</span><span style="display:inline-block; width: 15px;"></span> 01 (938) 131 4749
+    </p>
+  </div>
+  <div class="col-md-4 text-right">
+    <img src="http://avancexpress.com.mx/assets/images/icon-min.png" width="20%">
+
+  </div>
+</div>
+
+<div class="row text-contract">
+  <div class="col-md-12">
+    <div style="height: 50px"></div>
+  </div>
+  <div class="col-md-6" style="padding-left:65px">
+    <p class="tx-bold-purple-t text-center">--CLÁUSULAS--</p>
+    <p>
+      <span class="tx-bold-blue">PRIMERA. Información del Crédito.</span> Las PARTES determinan que, para efectos del
+      Contrato, la Información del Crédito
+      se encuentra establecida, en lo conducente, en la Carátula, la Tabla de Amortización y el presente Contrato. Los
+      importes que se asientan en la Carátula, se expresan en pesos, moneda nacional.<br>
+      <span class="tx-bold-green">SEGUNDA. Cálculo de Intereses.</span> Los intereses conforme a este Contrato, la
+      Carátula,
+      la Tabla de Amortización y el
+      Pagaré (según se define más adelante), serán calculados sobre la base de un año de 360 (trescientos sesenta) días
+      y por el número de días efectivamente transcurridos (i) durante el periodo correspondiente, para el caso de la
+      Tasa de Interés Ordinario del Crédito, o (ii) desde la fecha en que cualquier cantidad debió haberse pagado de
+      conformidad con lo previsto en el presente Contrato , la Carátula, la Tabla de Amortización y el Pagaré
+      correspondiente, hasta la fecha en que dichas cantidades hubieren sido pagadas en su totalidad, para el caso de la
+      Tasa de Interés Moratorio.<br>
+
+      <span class="tx-bold-purple">TERCERA. Otorgamiento del Crédito.</span> Como consecuencia del Contrato y, en la
+      fecha de
+      su celebración, el ACREDITANTE
+      otorga el Crédito al ACREDITADO y, cuyo importe, corresponderá al Monto del Crédito.
+      <span class="tx-bold">A efecto de que EL ACREDITADO, pueda disponer del monto del préstamo, este deberá como requisito indispensable,
+      imprimir el presente contrato junto con la caratula y pagaré y mismos documentos que le serán enviados en formato
+      PDF a la cuenta de correo electrónico previamente registrada, firmarlos de manera autógrafa y enviarlos junto con
+      una copia de su identificación oficial, así como un comprobante de domicilio, en las 24 horas siguientes a las
+      oficinas de AvancExpress Contigo mediante mensajería express al domicilio que en el mismo correo electrónico se le
+      indicará, en el entendido de que de no recibirse la documentación en las siguientes 48 horas hábiles, la solicitud
+        será dada de baja y se tendrá que empezar un nuevo trámite.</span><br><br>
+
+      Dentro del Monto del Crédito, no se encuentra comprendida la Tasa de Interés Ordinario del Crédito, así como el
+      IVA de la Tasa de Interés Ordinario del Crédito y, cuyos importes, serán pagados por el ACREDITADO al ACREDITANTE,
+      conforme a lo establecido en el Contrato y la Tabla de Amortización.<br><br>
+
+      Si EL ACREDITADO, opta por que la Comisión por Apertura se financie, EL ACREDITADO acepta que el importe que de la
+      misma resulte se adicione al monto del crédito cargándose dicho importe tanto en el pagaré como en la Tabla de
+      Amortización.<br><br>
+      <span class="tx-bold-blue">CUARTA. Destino del Crédito.</span> Las PARTES establecen que el Monto del Crédito será
+      destinado por el ACREDITADO para
+      cubrir sus necesidades personales. El ACREDITADO expone que el destino del Monto del Crédito es y será lícito.
+
+
+    </p>
+
+
+  </div>
+  <div class="col-md-6" style="padding-left:50px">
+    <p>
+      <span class="tx-bold-green">QUINTA. Disposición del Monto Neto Otorgado.</span> Las PARTES determinan que,
+      respecto de
+      la disposición del Monto Neto
+      Otorgado, el ACREDITADO, a través del Contrato, instruye, autoriza y faculta al ACREDITANTE, en forma expresa e
+      irrevocable, para que el Monto Neto Otorgado, sea entregado, a favor del ACREDITADO y, conforme a lo indicado en
+      el presente Contrato mediante transferencia electrónica a la cuenta que ha sido señalada por el ACREDITADO. Por lo
+      tanto, las PARTES determinan que la recepción de la transferencia en la cuenta indicada en la Carátula, se
+      refutará como: (i) la disposición que el ACREDITADO realice sobre el Monto del Crédito y, consecuentemente, de su
+      recepción por el ACREDITADO; (ii) la disposición se refutará como la entrega, a cargo del ACREDITANTE y a favor
+      del ACREDITADO, del Monto del Crédito; y (iii) la disposición se considerará como cumplimiento del ACREDITANTE, en
+      lo conducente, a las obligaciones que, a su cargo y a favor del ACREDITADO, se derivan del Contrato. Como
+      consecuencia de la disposición que, respecto del Monto del Crédito, realice o realiza el ACREDITADO, estará
+      obligado a pagar al ACREDITANTE, a través de las Parcialidades, el Monto Total a Pagar.<br><br>
+
+      El ACREDITADO, en este acto, suscribe a su cargo y a favor del ACREDITANTE, un pagaré cuyo importe asciende al
+      Monto Total a Pagar y, el que a su vez, documenta la disposición que realice o realiza el ACREDITADO sobre el
+      Monto del Crédito (en lo sucesivo el "Pagaré"). El ACREDITANTE, por conducto del Contrato, acusa la recepción del
+      Pagaré, a su entera satisfacción.<br><br>
+
+      <span class="tx-bold-purple">SEXTA. Pagos.</span> Las Parcialidades deberán pagarse al ACREDITANTE por el
+      ACREDITADO
+      mediante: (i) depósito a las
+      cuentas de las instituciones de crédito que el ACREDITANTE le instruya al ACREDITADO, o (ii) a través de la
+      institución bancaria o de crédito a la que el ACREDITADO haya autorizado en la Carta de Autorización de
+      Domiciliación de Recibos (en adelante la "Carta de Autorización") que se encuentra en el Sitio y forma parte
+      integral del presente Contrato.<br><br>
+
+      En caso que el ACREDITADO pague mediante depósito en la cuenta del ACREDITANTE: a) estará obligado a comprobar, en
+      cualquier momento, al ACREDITANTE, los pagos que sean depositados; y, b) deberá conservar los cupones o, los
+      recibos de depósito que correspondan o, que se emitan, debidamente sellados o, emitidos y sellados, por la
+      respectiva institución de crédito, por los que se acrediten los pagos que realice al ACREDITANTE, toda vez que los
+      mismos serán el único medio para demostrar al ACREDITANTE, los pagos que sean realizados por el ACREDITADO.
+      Asimismo: (i) los importes de la Tasa de Interés Moratorio; y, (ii) cualquier otro importe que el ACREDITADO
+      adeude al ACREDITANTE conforme al Contrato; deberán pagarse al ACREDITANTE por el ACREDITADO de la misma forma que
+      la antes enunciada.<br><br>
+      En caso que el ACREDITADO elija domiciliar los pagos con cargos a su cuenta de cheques o tarjeta de débito: EL
+      ACREDITADO deberá aprobar la Carta de Autorización de manera electrónica a
+
+
+    </p>
+  </div>
+</div>
+
+<div class="col-md-12" style="padding-left: 65px">
+  <hr class="bg-hr">
+</div>
+<div class="row tx-footer" style="padding-left: 65px">
+  <div class="col-md-4">
+    <p class="tx-bold">www.avancexpress.com.mx</p>
+  </div>
+  <div class="col-md-4">
+    <p><span class="tx-bold-blue">M.</span><span style="display:inline-block; width: 12px;"></span>
+      contacto@avancexpress.com.mx<br>
+      <span class="tx-bold-purple">T.</span><span style="display:inline-block; width: 15px;"></span> 01 (938) 131 4749
+    </p>
+  </div>
+  <div class="col-md-4 text-right">
+    <img src="http://avancexpress.com.mx/assets/images/icon-min.png" width="20%">
+
+  </div>
+</div>
+
+<div class="row text-contract">
+  <div class="col-md-12">
+    <div style="height: 50px"></div>
+  </div>
+  <div class="col-md-6" style="padding-left:65px">
+    <p>
+      través de El Sitio. O bien de manera
+      autógrafa. El ACREDITANTE podrá exigir que la cobranza de las Parcialidades se realice únicamente mediante
+      domiciliación, por lo que el ACREDITADO deberá aprobar de manera forzosa la Carta de Autorización de domiciliación
+      para que le sea otorgado el crédito. Es responsabilidad del ACREDITANTE resguardar cualquier comprobante emitido
+      por la institución del alta del servicio.<br><br>
+
+      El Monto Total a Pagar será pagado a cargo del ACREDITADO y a favor del ACREDITANTE, a través de las Parcialidades
+      y en las respectivas Fechas Límites de Pago que se establecen en la Carátula y la Tabla de Amortización.
+      En caso de mora en el pago o inexistencia de fondos en la cuenta del ACREDITADO a que se refiere la Carta de
+      Autorización, de cualesquiera de las prestaciones pactadas, las partes aceptan y reconocen que el ACREDITANTE
+      podrá cobrar al ACREDITADO si lo considera conveniente, intereses moratorios sobre los adeudos vencidos y no
+      pagados conforme a lo establecido en el presente Contrato (cargos adicionales pueden generarse por el uso de
+      plataformas (digitales) disponibles para el pago de parcialidades).
+
+      <span class="tx-bold-blue">SÉPTIMA. Aplicación de Pagos.</span> Cualquier pago que, en términos del Contrato, sea
+      realizado por el ACREDITADO, será
+      aplicado por el ACREDITANTE, para cubrir, en primer lugar y hasta donde alcance, cualquier comisión que pertenezca
+      a AvancExpress Contigo y que se establece en la Carátula, el saldo insoluto del importe de la Tasa de Interés
+      Moratorio de que se trate, en caso de que exista y, por último y hasta donde alcance, el saldo insoluto del
+      importe de las Parcialidades de que se trate.<br><br>
+
+      Respecto de la Comision por Apertura, y misma que se enuncia en la caratula del crédito, la misma a elección de EL
+      ACREDITADO, podrá cubrirse bien sea mediante descuento del monto del crédito otorgado en una sola exhibición, o
+      bien, mediante financiación adicionando su importe al capital otorgado en préstamo, causando el correspondiente
+      interés ordinario durante el plazo que dure el financiamiento.<br><br>
+
+      <span class="tx-bold-purple">OCTAVA. Pago Anticipado.</span> Siempre que el ACREDITADO se encuentre al corriente
+      en el
+      cumplimiento de las
+      obligaciones de pago que establece el Contrato y sus anexos, podrá pagar anticipadamente al ACREDITANTE, la
+      totalidad del Monto del Crédito que al momento se encuentre insoluto siempre y cuando avise a AvancExpress Contigo
+      por escrito por lo menos 10 días antes de su próxima fecha de corte. El pago anticipado antes mencionado causará:
+      A) la reducción del saldo insoluto de la Tasa de Interés Ordinario del Crédito, así como del saldo insoluto del
+      IVA de la Tasa de Interés Ordinario del Crédito y el principal pendiente del crédito; y, B) causará la terminación
+      del Contrato, en cuyo caso será procedente lo establecido en la Cláusula Novena Siguiente. El beneficio de Pago
+      Anticipado para el ACREDITADO sin penalización sólo aplicará para la totalidad del Monto del Crédito que al
+      momento se encuentre insoluto. En caso de que el ACREDITADO pague anticipadamente alguna Parcialidad, el monto
+      adicional será efectivamente cobrado en su próxima fecha de corte, sin que este pago anticipado afecte el Monto
+
+    </p>
+
+
+  </div>
+  <div class="col-md-6" style="padding-left:50px">
+    <p>
+
+      del Crédito, el monto de las Parcialidades o el plazo del Crédito.<br><br>
+      <span class="tx-bold-green">NOVENA. Efectos del Cumplimiento del Contrato.</span> En caso que el Crédito, sea
+      pagado en
+      los términos del Contrato, se
+      dará por terminado el mismo.<br><br>
+
+      <span class="tx-bold-purple">DÉCIMA. Buró de Crédito.</span> El ACREDITADO autoriza a la sociedad AvancExpress
+      Contigo S
+      de R.L. de C.V. para que solicite, reporte y obtenga en cualquier momento y de cualquier SOCIEDAD DE INFORMACIÓN
+      CREDITICIA (en lo sucesivo el "Buró de Crédito"), la información sobre su historial crediticio, respecto de las
+      operaciones crediticias y otras de naturaleza análoga, que lo integran. Por lo tanto y, toda vez que el
+      ACREDITADO, ha leído y comprendido la naturaleza y alcance del Buró de Crédito y de la información contenida en su
+      base de datos, cualquier incumplimiento del ACREDITADO a las obligaciones de pago que a su cargo establece el
+      Contrato, será registrado por el ACREDITANTE y/o AvancExpress Contigo S. de R.L. de C.V., en el Buró de Crédito
+      con claves de observación establecidas en el reporte de crédito respectivo, las cuales podrán afectar el historial
+      crediticio del ACREDITADO. Se entenderá por otorgada la autorización expresa del ACREDITADO al momento de aprobar
+      electrónicamente este contrato ingresando su contraseña o bien firmando de manera autógrafa la autorización
+      correspondiente.<br><br>
+
+      <span class="tx-bold-blue">DÉCIMA PRIMERA. Vigencia.</span> La vigencia del Contrato iniciará a partir de su fecha
+      de
+      celebración y terminará en la
+      Fecha Límite de Pago de la última Parcialidad o, en el día en que sean cumplimentadas, en su totalidad, las
+      obligaciones que, en términos del Contrato, contrae el ACREDITADO a su cargo.<br><br>
+
+      <span class="tx-bold-green">DÉCIMA SEGUNDA. Vencimiento Anticipado del Contrato.</span> El ACREDITANTE podrá dar
+      por
+      vencido anticipadamente el
+      Contrato y, por lo tanto, el ACREDITADO deberá pagar inmediatamente (o de lo contrario comenzará a correr la Tasa
+      de Interés Moratorio sobre las cantidades a continuación descritas) a favor del ACREDITANTE: (i) el saldo insoluto
+      del Monto Total a Pagar; (ii) la Comisión por intento fallido de cobro que se establece en la Carátula; (iii)
+      cualquier otro importe que el ACREDITADO adeude al ACREDITANTE conforme al Contrato; y, (iv) los daños y/o
+      perjuicios que, en su caso, le sean ocasionados al ACREDITANTE, en el caso que: a) El Crédito no sea pagado en los
+      términos del Contrato; b) La falta de pago por el ACREDITADO, en las Fechas Límites de Pago, de cualquiera de las
+      Parcialidades, así como de cualquier otro importe que el ACREDITADO adeude al ACREDITANTE conforme al Contrato; c)
+      La determinación de que alguna: (i) de las DECLARACIONES que corresponden al ACREDITADO; o, (ii) información o
+      documentación entregada por el ACREDITADO; resulte ser falsa; d) El incumplimiento del ACREDITADO a cualquier
+      obligación que, en términos del Contrato, se encuentra establecida a su cargo; e) El estado de insolvencia del
+      ACREDITADO; f) El Importe del Crédito se destine a actividades ilícitas; g) El inicio de cualquier procedimiento
+      contencioso, incluyendo aquellos de naturaleza civil, mercantil, laboral, penal y/o administrativa, en contra del
+      ACREDITADO; y h) La existencia de razones suficientes para que el ACREDITANTE considere que el ACREDITADO no podrá
+      hacer
+
+    </p>
+  </div>
+</div>
+
+<div class="col-md-12" style="padding-left: 65px">
+  <hr class="bg-hr">
+</div>
+<div class="row tx-footer" style="padding-left: 65px">
+  <div class="col-md-4">
+    <p class="tx-bold">www.avancexpress.com.mx</p>
+  </div>
+  <div class="col-md-4">
+    <p><span class="tx-bold-blue">M.</span><span style="display:inline-block; width: 12px;"></span>
+      contacto@avancexpress.com.mx<br>
+      <span class="tx-bold-purple">T.</span><span style="display:inline-block; width: 15px;"></span> 01 (938) 131 4749
+    </p>
+  </div>
+  <div class="col-md-4 text-right">
+    <img src="http://avancexpress.com.mx/assets/images/icon-min.png" width="20%">
+
+  </div>
+</div>
+
+<div class="row text-contract">
+  <div class="col-md-12">
+    <div style="height: 50px"></div>
+  </div>
+  <div class="col-md-6" style="padding-left:65px">
+    <p>
+      frente a sus obligaciones de pago conforme a este Contrato.<br><br>
+      <span class="tx-bold">De igual forma, el ACREDITADO se hace sabedor de que será reportado al Buró de Crédito cualquier incumplimiento
+      que haga a los términos del presente Contrato, quedando por lo tanto boletinado en dicho Buró de Crédito durante
+        el tiempo que marquen las políticas y normas de dicha institución.</span><br><br>
+      <span class="tx-bold-purple">DÉCIMA TERCERA. Caso Fortuito o Fuerza Mayor.</span> El ACREDITADO se obliga ante el
+      ACREDITANTE al debido cumplimiento
+      de las obligaciones que, a su cargo, se encuentran establecidas en el Contrato, incluso en presencia de hechos o
+      eventos de caso fortuito y/o de fuerza mayor.<br><br>
+      <span class="tx-bold-blue">DÉCIMA CUARTA. Impuestos. </span>Todos los impuestos, contribuciones y derechos que
+      deban
+      cubrirse con motivo de la
+      celebración y ejecución del Contrato, serán cubiertos por la parte que resulte obligada a ello, de conformidad con
+      las disposiciones fiscales aplicables. Ambas partes reconocen y acuerdan que cumplirán con todas las obligaciones
+      fiscales que le resulten aplicables por virtud del presente Con trato y que los recursos económicos utilizados
+      provienen y provendrán de fuentes lícitas y serán utilizados para actividades lícitas en todo momento. Ambas
+      partes reconocen y acuerdan que AvancExpress Contigo no tiene obligación fiscal alguna relacionada con el presente
+      Contrato, salvo por aquellas relacionadas con las comisiones que sean cobradas directamente y en beneficio de
+      AvancExpress Contigo, quedando por lo tanto ambas partes obligadas a indemnizar y sacar en paz y a salvo a
+      AvancExpress Contigo de cualquier daño, perjuicio, demanda y/o acción que su incumplimiento fiscal le provoque a
+      AvancExpress Contigo.<br><br>
+
+      <span class="tx-bold-green">DÉCIMA QUINTA. Transmisión.</span> El ACREDITADO no podrá transmitir cualquier derecho
+      u
+      obligación que en términos del
+      Contrato, resulte a favor o a cargo de él, sin la previa aprobación escrita del ACREDITANTE, por lo que cualquier
+      transmisión en términos distintos a los aquí previstos será nula y no será reconocida por el ACREDITANTE.
+      <br><br>
+      <span class="tx-bold-purple">DÉCIMA SEXTA. Leyes Aplicables. </span>El Contrato se rige por lo dispuesto en sus
+      CLÁUSULAS, en su defecto o
+      supletoriamente y en el orden establecido, por las disposiciones contenidas y que resulten aplicables de la Ley
+      General de Títulos y Operaciones de Crédito, el Código de Comercio y el Código Civil Federal.<br>
+      <span class="tx-bold-blue">DÉCIMA SÉPTIMA. Domicilios. </span>Las PARTES señalan como sus domicilios para los
+      efectos
+      de notificaciones de carácter
+      extrajudicial o judicial que se relacionen con el Contrato, los que refiere, respectivamente, el capítulo de
+      DECLARACIONES. Sin embargo, las PARTES podrán cambiar o señalar en el futuro cualquier otro domicilio, mediante
+      notificación realizada a la otra parte con por lo menos 10 Días Hábiles de anticipación, en el entendido que de no
+      proporcionarse tal aviso de cambio, todas y cada una de las notificaciones que se le hicieren a la parte de que se
+      trate, en el domicilio que ahora
+
+
+    </p>
+
+
+  </div>
+  <div class="col-md-6" style="padding-left:50px">
+    <p>
+      señala, se considerarán legalmente realizadas en su perjuicio.
+      Las notificaciones
+      extrajudiciales que tengan que realizar las PARTES, serán por escrito, dirigidas a la contraparte, mediante
+      entrega personal con acuse de recibo en el respectivo domicilio y serán entregadas en la fecha en que sean
+      recibidas por la parte a quien hayan sido dirigidas.<br><br>
+
+      Sin perjuicio de lo establecido en los párrafos anteriores de la presente CLÁUSULA, las notificaciones
+      extrajudiciales que sean relativas al requerimiento del o de los pagos del Crédito al ACREDITADO, podrán
+      realizarse por el ACREDITANTE, en cualquier domicilio del ACREDITADO que sea del conocimiento del ACREDITANTE, por
+      escrito y, entregadas en forma personal, sin acuse de recibo.
+
+
+      <span class="tx-bold-green">DÉCIMA OCTAVA. Subtítulos.</span> Los subtítulos en las CLÁUSULAS del Contrato, son
+      exclusivamente por conveniencia de
+      las Partes, para una referencia y lectura más simple, por lo que no regirán la interpretación del Contrato.<br>
+      <span class="tx-bold-purple">DÉCIMA NOVENA. Independencia de Cláusulas.</span> La nulidad de cualquiera de las
+      clausulas
+      establecidas en este Contrato
+      de ninguna manera se podrá interpretar como una nulidad del resto del clausulado o del Contrato, teniendo como
+      efecto únicamente que dic ha cláusula declarada como nula se tenga por no puesta.<br><br>
+
+      <span class="tx-bold-blue">VIGÉSIMA. Tribunales Competentes.</span> Para la interpretación y cumplimiento del
+      Contrato,
+      las PARTES se someten
+      expresamente a la jurisdicción de los Tribunales del Estado de Campeche. Por lo tanto, la ACREDITADA renuncia a
+      fuero territorial distinto que por cualquier causa pudiere corresponderle, ya sea en lo presente o en lo
+      futuro.<br><br>
+
+      <span class="tx-bold">Autorizaciones Adicionales.</span> El ACREDITADO, otorga su consentimiento para: (i) que
+      AVANCEXPRESS CONTIGO, S. de R.L.
+      de C.V. comparta y/o proporcione la información financiera, comercial, operativa y personal del ACREDITADO, así
+      como la relativa al Contrato; (ii) que su información pueda ser utilizada por AVANCEXPRESS CONTIGO, S. de R.L. de
+      C.V. con fines mercadotécnicos y/o publicitarios; (iii) recibir en su domicilio particular y/o laboral, correos
+      electrónicos personales y/o laborales, teléfonos fijos particulares y/o laborales, teléfonos móviles particulares
+      y/o laborales o, por cualquier otro medio, publicidad de los bienes, productos y/o servicios; y, (iv) que
+      AVANCEXPRESS CONTIGO S. de R.L. de C.V. y/o la persona que designe, realicen llamadas a cualquier teléfono y/o
+      visitas a cualquier domicilio del ACREDITADO, además de los días hábiles, en días que sean declarados como
+      inhábiles y, a cualquier hora, para el efecto de requerirle el o los pagos del Crédito.<br>
+      De igual forma se hace constar que tanto la sociedad AvancExpress Contigo, S. de R.L. de C.V. como cualquier
+      tercero designado por dicha sociedad, podrá, a nombre y por cuenta del ACREDITANTE, iniciar cualquier tipo de
+      procedimiento contencioso en contra del ACREDITADO, en caso de incumplimiento a cualquiera de los términos y
+      condiciones del presente Contrato.<br><br>
+      Las PARTES reconocen el alcance y efectos del Contrato, obligándose en todos y cada uno de los términos asentados
+      en el mismo y, por lo tanto, el ACREDITADO al ingresar su contraseña
+
+
+    </p>
+  </div>
+</div>
+
+<div class="col-md-12" style="padding-left: 65px">
+  <hr class="bg-hr">
+</div>
+<div class="row tx-footer" style="padding-left: 65px">
+  <div class="col-md-4">
+    <p class="tx-bold">www.avancexpress.com.mx</p>
+  </div>
+  <div class="col-md-4">
+    <p><span class="tx-bold-blue">M.</span><span style="display:inline-block; width: 12px;"></span>
+      contacto@avancexpress.com.mx<br>
+      <span class="tx-bold-purple">T.</span><span style="display:inline-block; width: 15px;"></span> 01 (938) 131 4749
+    </p>
+  </div>
+  <div class="col-md-4 text-right">
+    <img src="http://avancexpress.com.mx/assets/images/icon-min.png" width="20%">
+
+  </div>
+</div>
+
+<div class="row text-contract">
+  <div class="col-md-12">
+    <div style="height: 50px"></div>
+  </div>
+  <div class="col-md-6" style="padding-left:65px">
+    <p>
+
+      y firmar electrónicamente este contrato, o bien mediante firma autógrafa, otorgará su conformidad con el Contrato
+      y sus efectos, siendo conocedor de la cláusula de Aviso de Privacidad, contenida en el Contrato donde se hace
+      referencia al cuidado y confidencialidad de los datos personales proporcionados, derechos y obligaciones, en la
+      Ciudad y el día indicados en la Carátula. Lugar y fecha que se considerarán para todos los efectos legales, como
+      lugar y fecha de firma del Contrato. De conformidad con el Artículo 80 del Código de Comercio y en términos de lo
+      dispuesto por el artículo 1803 del Código Civil Federal, se entenderá que el presente Contrato quedará
+      perfeccionado desde el momento en que se introduzca la contraseña y se dé clic en "Firmar", o bien al estampar su
+      firma autógrafa. En caso de no aceptar en forma absoluta y completa los términos y condiciones del presente
+      Contrato, deberá abstenerse de introducir su contraseña y dar clic en el recuadro de "Firmar" o de firmarlo
+      autógrafamente.<br><br>
+    <p class="tx-bold-purple-t text-center">--AVISO DE PRIVACIDAD--</p>
+    <span class="tx-bold">Aviso de Privacidad.</span> Los datos personales y sensibles que los usuarios proporcionen
+    al momento de su ingreso y/o
+    registro al Sitio tienen como finalidad el crear un expediente y facilitar el acceso a su cuenta, así como a su
+    configuración, como el cargar y descargar videos, fotos, sonidos, etc. La recopilación de datos se llevará a cabo
+    única y exclusivamente a través de los formularios publicados en la web y de aquellos existentes de forma física
+    en las oficinas de AvancExpress Contigo y se podrán verificar vía telefónica o por medios electrónicos. En caso de
+    no contar con los datos señalados, AvancExpress Contigo no estaría en posibilidad de proporcionar su servicio, ya
+    que los datos que se solicitan son indispensables para dar acceso y uso a la página web., (i) con previo
+    consentimiento del usuario, podrá compartir y/o proporcionar la información financiera, comercial, operativa y
+    personal del Usuario, así como la relativa a cualquier actividad que se promueve en el Sitio; y (ii) autoriza para
+    que su información pueda ser utilizada por AvancExpress Contigo con fines mercadotécnicos y/o publicitarios, o
+    para cumplimentar con las obligaciones contractuales contraídas con el usuario. El ingreso y/o registro a través
+    del Sitio implica el consentimiento pleno y sin reservas de los usuarios para el tratamiento de sus datos
+    personales de acuerdo con el presente Aviso de Privacidad.<br><br>
+
+    AvancExpress Contigo cuenta con medidas físicas, técnicas y administrativas de seguridad para la protección de
+    Datos Personales proporcionados por los usuarios.<br><br>
+
+    En cumplimiento a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, AvancExpress
+    Contigo ofrece el siguiente medio de contacto, y el siguiente procedimiento, para acceder, rectificar, cancelar u
+    oponer (ARCO) sus datos personales:
+
+
+    </p>
+
+
+  </div>
+  <div class="col-md-6" style="padding-left:50px">
+    <p>
+      Acceso (A) y Rectificación (R): Para acceder a su información, el usuario deberá ingresar al Sitio, dar clic en
+      “Iniciar Sesión”
+      y llenar sus datos con los cuales registró su cuenta. Los datos
+      podrá verlos en su panel de
+      control, y específicamente en la
+      sección “Mi Cuenta”, en la parte superior derecha de la pantalla. El usuario
+      podrá rectificar sus datos personales en esta misma sección. AvancExpress Contigo se reserva el derecho de
+      verificar la veracidad de la información antes de realizar o autorizar el cambio. Cualquier duda sobre este
+      procedimiento, favor de enviar un correo electrónico a contacto@avancexpress.com.mx o llamar al 01-938-286-1103.
+      Cancelación (C) y Oposición (O): El usuario tiene la facultad de eliminar su información en forma directa. Para
+      ello, deberá ingresar a su cuenta en la dirección www.avancexpress.com.mx y elegir la opción "Mi Cuenta" en el
+      menú de la parte inferior izquierda de su panel, deberá dar clic en "Eliminar Cuenta" y confirmar la eliminación
+      con la contraseña que creó al registrarse. Los usuarios que tengan una relación jurídica con AvancExpress Contigo,
+      como créditos activos o saldo en su cuenta de prestatario, no podrán eliminar su cuenta. AvancExpress Contigo
+      podrá mantener información sobre la actividad del usuario en el portal para fines estadísticos, sin que esto
+      suponga la retención de datos de identificación, documentos, o información sensible. AvancExpress Contigo se
+      reserva la posibilidad de mantener datos requeridos para ejercer sus políticas de negocio, como evitar que
+      solicitantes de crédito completen una nueva solicitud en menos de 6 meses si la solicitud original ha sido
+      rechazada.<br><br>
+
+      AvancExpress Contigo se reserva el derecho de modificar en cualquier momento el contenido del presente Aviso de
+      Privacidad. Cualquier cambio en el Aviso de Privacidad les será informado a sus usuarios a través del Sitio.
+      <br><br>
+      Una vez que se publique el Aviso de Privacidad en el Sitio entrará en vigor automáticamente y deberá dar estricto
+      cumplimiento al texto.
+
+    </p>
+    <div style="height: 200px"></div>
+    <div class="col-md-6 text-center" style="padding: 10px !important;">
+
+      <hr class="bg-hr-b">
+      <p>FIRMA AVANCEXPRESS</p>
+    </div>
+    <div class="col-md-6 text-center" style="padding: 10px !important;">
+
+      <hr class="bg-hr-b">
+      <p>FIRMA EL ACREDITADO</p>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12" style="padding-left: 65px">
+  <hr class="bg-hr">
+</div>
+<div class="row tx-footer" style="padding-left: 65px">
+  <div class="col-md-4">
+    <p class="tx-bold">www.avancexpress.com.mx</p>
+  </div>
+  <div class="col-md-4">
+    <p><span class="tx-bold-blue">M.</span><span style="display:inline-block; width: 12px;"></span>
+      contacto@avancexpress.com.mx<br>
+      <span class="tx-bold-purple">T.</span><span style="display:inline-block; width: 15px;"></span> 01 (938) 131 4749
+    </p>
+  </div>
+  <div class="col-md-4 text-right">
+    <img src="http://avancexpress.com.mx/assets/images/icon-min.png" width="20%">
+
+  </div>
+</div>
+
+<div class="row" style="padding-left: 65px">
+  <div class="col-md-12">
+    <div style="height: 65px"></div>
+  </div>
+  <div class="col-md-12 text-center">
+    <p class="title-text">ANEXO "A"</p>
+    <p class="title-text">TABLA DE AMORTIZACIÓN</p>
+  </div>
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>No. Pago</th>
+        <th>Fecha de Corte</th>
+        <th>Interés</th>
+        <th>IVA (16%)</th>
+        <th>Total Pago</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
 
 
 </body>

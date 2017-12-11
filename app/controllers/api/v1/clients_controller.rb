@@ -1,27 +1,90 @@
 class Api::V1::ClientsController < ApplicationController
 
-  before_action :doorkeeper_authorize!, :except => [:create_pdf,:preregister, :get_client, :register]
+  before_action :doorkeeper_authorize!, :except => [:create_pdff, :preregister, :get_client, :register]
 
   def index
-    @clients = Client.where(status: 'pending').order(created_at: :desc)
+    @clients = Client.order(created_at: :desc)
     render :index
   end
 
-  def create_pdf
-    @client = Client.find(1)
-    @date = Time.now.strftime("%m/%d/%Y")
+  def create_pdff
 
-    pdf = WickedPdf.new.pdf_from_string(
-        render_to_string('api/v1/clients/caratula.html.erb', layout: false,
-                         :margin => { :top => 10, :bottom => 18 , :left => 0 , :right => 0})
+    @client = Client.find(32)
+    @date = Time.now.strftime("%m/%d/%Y")
+    @loanDetail = @client.client_loan_detail
+    @addressDetail = @client.address_client
+    @userDetail = @client.user
+
+    pdfCaratula = WickedPdf.new.pdf_from_string(
+        render_to_string('api/v1/clients/caratula.html.erb')
     )
 
+    pdfContract = WickedPdf.new.pdf_from_string(render_to_string('api/v1/clients/contract.html.erb'),
+                                                :margin => {:top => 0, :bottom => 10, :left => 0, :right => 10}
+    )
+    pdfCarta = WickedPdf.new.pdf_from_string(render_to_string('api/v1/clients/carta_autorizacion.html.erb'),
+                                             :margin => {:top => 15, :bottom => 10, :left => 10, :right => 10}
+    )
+
+    nameCaratula = @client.id.to_s + '_caratula_' + @client.name + @client.last_name + '.pdf'
+    nameContract = @client.id.to_s + '_contrato_' + @client.name + @client.last_name + '.pdf'
+    nameCarta = @client.id.to_s + '_carta_' + @client.name + @client.last_name + '.pdf'
+
     # then save to a file
-    save_path = Rails.root.join('public/uploads','filename.pdf')
+    save_path = Rails.root.join('public/files_clients/', nameCaratula)
     File.open(save_path, 'wb') do |file|
-      file << pdf
+      file << pdfCaratula
     end
-    render :caratula
+
+    save_path = Rails.root.join('public/files_clients/', nameContract)
+    File.open(save_path, 'wb') do |file|
+      file << pdfContract
+    end
+
+    save_path = Rails.root.join('public/files_clients/', nameCarta)
+    File.open(save_path, 'wb') do |file|
+      file << pdfCarta
+    end
+    render :contract
+  end
+
+  def create_pdf(clientData)
+    @client = clientData
+    @date = Time.now.strftime("%m/%d/%Y")
+    @loanDetail = @client.client_loan_detail
+    @addressDetail = @client.address_client
+    @userDetail = @client.user
+
+    pdfCaratula = WickedPdf.new.pdf_from_string(
+        render_to_string('api/v1/clients/caratula.html.erb')
+    )
+
+    pdfContract = WickedPdf.new.pdf_from_string(render_to_string('api/v1/clients/contract.html.erb'),
+                                                :margin => {:top => 0, :bottom => 10, :left => 0, :right => 10}
+    )
+    pdfCarta = WickedPdf.new.pdf_from_string(render_to_string('api/v1/clients/carta_autorizacion.html.erb'),
+                                             :margin => {:top => 15, :bottom => 10, :left => 10, :right => 10}
+    )
+
+    nameCaratula = @client.id.to_s + '_caratula_' + @client.name + @client.last_name + '.pdf'
+    nameContract = @client.id.to_s + '_contrato_' + @client.name + @client.last_name + '.pdf'
+    nameCarta = @client.id.to_s + '_carta_' + @client.name + @client.last_name + '.pdf'
+
+    # then save to a file
+    save_path = Rails.root.join('public/files_clients/', nameCaratula)
+    File.open(save_path, 'wb') do |file|
+      file << pdfCaratula
+    end
+
+    save_path = Rails.root.join('public/files_clients/', nameContract)
+    File.open(save_path, 'wb') do |file|
+      file << pdfContract
+    end
+
+    save_path = Rails.root.join('public/files_clients/', nameCarta)
+    File.open(save_path, 'wb') do |file|
+      file << pdfCarta
+    end
   end
 
 
@@ -44,6 +107,9 @@ class Api::V1::ClientsController < ApplicationController
       @client.motive = @dataClient[:motive]
       @client.client_key = SecureRandom.hex 32
       @client.status = 'pending'
+      @client.val_first = false
+      @client.val_second = false
+      @client.val_third = false
       @client.user_id = @user.id
       if @client.save
         params = @dataPrestamo
@@ -139,10 +205,43 @@ class Api::V1::ClientsController < ApplicationController
 
   end
 
+  def upload_contract_files
+
+    @file = params[:file]
+    @client = Client.find(params[:client_id])
+    @file_client = FileContractClient.new
+    @file_client.client_id = @client.id
+    @file_client.name = @file
+
+    if @file_client.save
+      if !@file_client.name.file.nil?
+        render json: {file: @file_client.name}
+      else
+        render json: {message: 'Error al subir el archivo'}
+      end
+
+    end
+
+  end
+
   def get_client_files
     client_id = params[:client_id]
     client = Client.find(client_id)
     files = client.file_clients
+    @file_array ||= []
+    files.each do |file|
+      @file_array.push({
+                           name: file.name_identifier,
+                           url: file.name.url
+                       })
+    end
+    render json: {data_client: client, files: @file_array}
+  end
+
+  def get_contract_files
+    client_id = params[:client_id]
+    client = Client.find(client_id)
+    files = client.file_contract_clients
     @file_array ||= []
     files.each do |file|
       @file_array.push({
@@ -166,6 +265,78 @@ class Api::V1::ClientsController < ApplicationController
     render json: {clients: client_array}
   end
 
+  def validation_second
+    status = params[:status]
+    client_id = params[:client_id]
+    client = Client.find(client_id)
+    if status
+      client.val_second = true;
+    else
+      client.val_first = false;
+    end
+
+    if client.save
+      render json: {
+          status: true
+      }
+    end
+
+  end
+
+  def validation_third
+    status = params[:status]
+    client_id = params[:client_id]
+    client = Client.find(client_id)
+    if status
+      client.val_third = true;
+    else
+      client.val_second = false;
+      client.val_first = false;
+    end
+
+    if client.save
+      render json: {
+          status: true
+      }
+    end
+
+  end
+
+  def validation_four
+    status = params[:status]
+    client_id = params[:client_id]
+    client = Client.find(client_id)
+    if status
+      client.status = 'accepted';
+    else
+      client.val_third = false;
+      client.val_second = false;
+      client.val_first = false;
+      client.status = 'rejected';
+    end
+
+    if client.save
+      render json: {
+          status: true
+      }
+    end
+
+  end
+
+  def aply_cupon
+    nameCupon = params[:nameCupon]
+    cupon = Cupon.where(decription: nameCupon)
+    if cupon
+      render json: {
+          data_cupon: cupon
+      }
+    else
+      render json: {
+          status: false
+      }
+    end
+  end
+
   def change_status_loan
     status = params[:status]
     client_id = params[:client_id]
@@ -173,7 +344,7 @@ class Api::V1::ClientsController < ApplicationController
     client_address = AddressClient.find_by_client_id(client_id)
     client_loan = ClientLoanDetail.find_by_client_id(client_id)
     if status
-      client.status = 'accepted'
+      client.val_first = true
       data_general = params[:client_general]
       data_general.permit!
       client.update(data_general)
@@ -184,10 +355,10 @@ class Api::V1::ClientsController < ApplicationController
       client_address.update(data_address)
       client_loan.update(data_loan)
     else
-      client.status = 'rejected'
+      client.val_first = false
     end
     if client.save && client_loan.save && client_address.save
-      #create_pdf(client)
+      create_pdf(client)
       render json: {
           status: true
       }
@@ -198,5 +369,5 @@ class Api::V1::ClientsController < ApplicationController
     end
 
   end
-
 end
+

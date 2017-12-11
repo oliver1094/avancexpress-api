@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171206215008) do
+ActiveRecord::Schema.define(version: 20171211203137) do
 
   create_table "address_clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "street_number"
@@ -56,7 +56,18 @@ ActiveRecord::Schema.define(version: 20171206215008) do
     t.string "status"
     t.string "telfijo"
     t.decimal "monto", precision: 10, scale: 2
+    t.boolean "val_first"
+    t.boolean "val_second"
+    t.boolean "val_third"
     t.index ["user_id"], name: "index_clients_on_user_id"
+  end
+
+  create_table "cupons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "decription"
+    t.decimal "porcentage_desc", precision: 10, scale: 2
+    t.date "date_v"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "file_clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -65,6 +76,14 @@ ActiveRecord::Schema.define(version: 20171206215008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_file_clients_on_client_id"
+  end
+
+  create_table "file_contract_clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "name"
+    t.bigint "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_file_contract_clients_on_client_id"
   end
 
   create_table "oauth_access_grants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -129,6 +148,7 @@ ActiveRecord::Schema.define(version: 20171206215008) do
   add_foreign_key "client_loan_details", "clients"
   add_foreign_key "clients", "users"
   add_foreign_key "file_clients", "clients"
+  add_foreign_key "file_contract_clients", "clients"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "users", "type_users"

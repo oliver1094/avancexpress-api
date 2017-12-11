@@ -18,11 +18,17 @@ Rails.application.routes.draw do
           get 'get_client' => 'clients#get_client'
           post 'preregister' => 'clients#preregister'
           post 'register' => 'clients#register'
+          post 'upload_contract_files' => 'clients#upload_contract_files'
           post 'upload_files' => 'clients#upload_files'
           get 'get_client_files' => 'clients#get_client_files'
+          get 'get_contract_files' => 'clients#get_contract_files'
           get 'get_clients' => 'clients#get_clients'
+          get 'aply_cupon' => 'clients#aply_cupon'
           post 'change_status_loan' => 'clients#change_status_loan'
-          get 'create_pdf' => 'clients#create_pdf'
+          post 'validation_second' => 'clients#validation_second'
+          post 'validation_third' => 'clients#validation_third'
+          post 'validation_four' => 'clients#validation_four'
+          get 'create_pdff' => 'clients#create_pdff'
         end
       end
     end

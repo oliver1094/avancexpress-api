@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'/>
+  <title>PDF</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <style>
+    .container {
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .row {
+      margin-right: -15px;
+      margin-left: -15px;
+      display: flex;
+    }
+
+    .col-md-6 {
+      width: 50%;
+    }
+
+    .col-md-4 {
+      width: 33.3%;
+    }
+
+    .col-md-3 {
+      width: 25%;
+    }
+
+    .col-md-9 {
+      width: 75%;
+    }
+
+    .col-md-7 {
+      width: 58.3%;
+    }
+
+    .col-md-5 {
+      width: 41.6%;
+    }
+
+    .col-md-12 {
+      width: 100%;
+
+    }
+
+    .col-md-8 {
+      width: 66.6%;
+    }
+
+    .col-md-12, .col-md-3, .col-md-4, .col-md-6, .col-md-9, .col-md-8, .col-md-5, .col-md-7 {
+      float: left;
+      position: relative;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      padding-top: 5px;
+    }
+
+    .text-color-blue {
+      color: #0e3d89;
+      width: 100px;
+      font-weight: bold;
+      background-color: white;
+    }
+
+    .bg-gray {
+      background-color: #f7f7f9;
+    }
+
+    .bg-gray-s {
+      background-color: #e9ecef;
+    }
+
+    .bg-hr {
+      border-top: 1px solid gray;
+    }
+
+    .bg-hr-b {
+      border-top: 1px solid black;
+    }
+
+    .ts-10 {
+      font-size: 10pt;
+    }
+
+    .title-text {
+      color: #0e3d89;
+      font-size: 13pt;
+      font-weight: bold;
+    }
+
+    .text-footer {
+      color: #0e3d89;
+      font-size: 10pt;
+
+    }
+
+    .tx-bold-blue {
+      font-weight: bold;
+      color: #58D3F7;
+    }
+
+    .tx-bold-purple {
+      font-weight: bold;
+      color: #531B93;
+    }
+
+    .tx-bold-purple-t {
+      font-weight: bold;
+      color: #531B93;
+      font-size: 10pt;
+    }
+
+    .tx-bold-green {
+      font-weight: bold;
+      color: #90b900;
+
+    }
+
+    .text-contract {
+      font-size: 9pt;
+      text-align: justify;
+    }
+
+    .tx-bold {
+      font-weight: bold;
+    }
+
+    .tx-footer {
+      font-size: 9pt;
+    }
+
+
+  </style>
+</head>
+<body>
+
+<div class="text-center">
+  <img src="https://avancexpress-api.herokuapp.com/images/slogan.png" width="35%">
+</div>
+<h2></h2>
+<div class="row text-right" style="padding-top:45px">
+  <div class="col-md-3"></div>
+  <div class="col-md-4 text-right"><p class="tx-bold-purple">N DEL CLIENTE: 4354345</p></div>
+  <div class="col-md-5 text-right"><p class="tx-bold-purple">N DEL CONTRATO: 65657657</p></div>
+</div>
+
+<div class="row text-center" style="padding-top: 75px">
+  <div class="col-md-12">
+    <h3 class="title-text">CARTA DE AUTORIZACIÓN PARA CARGOS A CUENTA BANCARIA</h3>
+  </div>
+</div>
+
+<div class="row text-contract" style="padding-top:60px">
+  <div class="col-md-12">
+  <p style="text-align: justify">
+    Proveedor (Acreditante): AVANCEXPRESS, S. DE R.L. DE C.V. En relación con el Contrato de Depósito Bancario de Dinero
+    a la Vista en Moneda Nacional (en lo sucesivo “Cuenta Bancaria”) que tengo celebrado con la institución de crédito
+    que más adelante señalo (en lo sucesivo “Institución Bancaria”); de la cual soy titular y tengo registrada bajo el
+    nombre de ________________________________, por este conducto autorizo al “Proveedor (Acreditante)” para que a
+    partir de esta fecha y en adelante, cargue a mi “Cuenta Bancaria”, las cantidades que le adeude en relación con las
+    obligaciones de pago derivadas del Contrato de Apertura de Crédito Simple (en lo sucesivo el “CONTRATO”) celebrado
+    con AVANCEXPRESS, S. DE R.L. DE C.V. (en lo sucesivo “Proveedor (Acreditante)”):<br><br>
+    <span class="tx-bold">“Institución Bancaria”:</span> ____________________________________________________<br>
+    <span class="tx-bold">CLABE “Cuenta Bancaria” (18 dígitos):</span> ______________________________________<br><br>
+    Asimismo el “Proveedor (Acreditante)” a partir de esta fecha y en adelante podrá disponer total o parcialmente de
+    las sumas de dinero depositadas en mi “Cuenta Bancaria” a efecto de cubrir las cantidades que resulten a mi cargo
+    derivadas de las obligaciones establecidas en el “CONTRATO”, en estricto cumplimiento de los términos del mismo.
+    Para efectos del servicio de cargo a cuenta bancaria se otorgan las siguientes instrucciones:<br><br>
+    Para el pago de las ____ amortizaciones mensuales convenidas en el “CONTRATO”, estas no deberán exceder las
+    cantidades señaladas en la Tabla de Amortización que forma parte integrante del “CONTRATO”, esto es, el importe
+    máximo de $ ________________, MONEDA NACIONAL, más el Impuesto al Valor Agregado (I.V.A.) que se genere en cada
+    mensualidad pactada.<br><br>
+    Para el caso de que por cualquier motivo se generen saldos y/o accesorios (intereses moratorios) a mi cargo,
+    derivados únicamente de lo estipulado en el “CONTRATO”, y su importe exceda los montos referidos anteriormente,
+    manifiesto mi instrucción expresa para que estos sean dispuestos de la “Cuenta Bancaria” por el “Proveedor
+    (Acreditante)”. Cuando el “Proveedor (Acreditante)” se vea en la necesidad de agotar la instrucción anterior, deberá
+    de informar al suscrito en el siguiente Estado de Cuenta los montos y conceptos cargados.<br><br>
+    Manifiesto que mi obligación de mantener fondos suficientes para cubrir los pagos convenidos en el “CONTRATO”
+    comenzará a partir de los 30 días naturales siguientes a la fecha del “CONTRATO” y así mensual y sucesivamente, lo
+    anterior a efecto de que el “Proveedor (Acreditante)” pueda cumplir con la presente Instrucción a que se refiere
+    esta carta.<br><br>
+    Estoy de acuerdo en que las obligaciones pecuniarias a mi cargo se tengan por acreditadas al siguiente día hábil
+    bancario al que se realice el cargo a mi “Cuenta Bancaria”.
+    Además el “Proveedor (Acreditante)” podrá abonar las sumas de dinero que disponga de mi “Cuenta Bancaria”, a la
+    cuenta de cheques que la “Institución Bancaria” o cualquier otra institución de crédito le lleve, de conformidad a
+    las instrucciones del “Proveedor (Acreditante)”.<br><br>
+    Estoy conforme y acepto expresamente que esta autorización se sujetará a las Políticas que para este tipo de
+    servicios tenga establecidas la “Institución Bancaria”, mismas que manifiesto conocer. Asimismo estoy consciente en
+    que:
+
+
+  </p>
+  </div>
+</div>
+
+<div class="col-md-12" style="padding: 0">
+  <hr class="bg-hr">
+</div>
+<div class="row tx-footer">
+  <div class="col-md-4">
+    <p class="tx-bold">www.avancexpress.com.mx</p>
+  </div>
+  <div class="col-md-4">
+    <p><span class="tx-bold-blue">M.</span><span style="display:inline-block; width: 12px;"></span>
+      contacto@avancexpress.com.mx<br>
+      <span class="tx-bold-purple">T.</span><span style="display:inline-block; width: 15px;"></span> 01 (938) 131 4749
+    </p>
+  </div>
+  <div class="col-md-4 text-right">
+    <img src="http://avancexpress.com.mx/assets/images/icon-min.png" width="20%">
+
+  </div>
+</div>
+
+<div class="row text-contract" style="padding-top:60px">
+  <div class="col-md-12">
+    <p style="text-align: justify">
+      <span class="tx-bold">PRIMERA.-</span> La “Institución Bancaria” no estará obligada a cumplir con las instrucciones anteriores cuando la “Cuenta
+      Bancaria” referida:
+      a) No tenga los fondos suficientes para realizar los cargos antes instruidos; y/o
+      b) Se encuentre bloqueada o cancelada.<br>
+
+      <span class="tx-bold">SEGUNDA.-</span> Esta autorización estará vigente a partir de esta fecha y mientras exista cualquier saldo a mi cargo
+      derivado del “CONTRATO” y/o no sea revocada la presente instrucción por el suscrito.<br><br>
+      El “Proveedor (Acreditante)” no tendrá responsabilidad alguna de verificar si los datos proporcionados por el que
+      suscribe son ciertos y verdaderos. Por tanto, en caso de error u omisión, el “Proveedor (Acreditante)” no asume
+      responsabilidad alguna por la falta de cumplimiento de la instrucción, obligándome a pagar por cualquiera de los
+      otros medios señalados en el “CONTRATO”.<br><br>
+      En caso de que no existan fondos suficientes en la “Cuenta Bancaria” para cubrir las obligaciones pecuniarias a mi
+      cargo:<br><br>
+      Reconozco que el “Proveedor (Acreditante)” podrá sin responsabilidad alguna realizar diversos intentos de cargo a la
+      “Cuenta Bancaria” para el pago de las obligaciones pecuniarias a mi cargo derivadas del “CONTRATO”, sujeto a los
+      términos del mismo. Lo anterior no excluye la responsabilidad del que suscribe de pagar las obligaciones pecuniarias
+      que corresponda en las fechas de vencimiento convenidas, ni del pago de los intereses se generen en caso de falta de
+      pago puntual. En caso de que no puedan efectuarse los cargos que procedan en la “Cuenta Bancaria”, el que suscribe
+      se obliga a pagar las cantidades que correspondan directamente en ventanilla, a través de transferencia electrónica,
+      o mediante cargos y abonos en cuentas del “Proveedor (Acreditante) en los términos del “CONTRATO”. Para dichos
+      efectos, las instrucciones sobre el número de cuenta, Banco y número de referencia de AVANCEXPRESS, S. DE R.L. DE
+      C.V. podrán ser consultados en el Sitio Web y/o llamando al Centro de Atención a Clientes de AvancExpress, cuyo
+      número de teléfono es _____________, en días y horas hábiles.<br><br>
+      Estoy enterado de que en cualquier momento podré solicitar la cancelación del servicio de cargo a cuenta bancaria
+      presente sin costo a mi cargo.<br><br><br><br><br><br>
+
+      Fecha: ____________________
+      Nombre del Cliente: ______________________________________
+      Firma: ___________________________
+    </p>
+
+  </div>
+</div>
+
+<div class="col-md-12" style="padding-left: 0; padding-top: 370px">
+  <hr class="bg-hr">
+</div>
+<div style="height: 100px">
+  <br>
+</div>
+<br>
+<div class="row tx-footer" style="margin-top: 60px">
+  <div class="col-md-4">
+    <p class="tx-bold">www.avancexpress.com.mx</p>
+  </div>
+  <div class="col-md-4">
+    <p><span class="tx-bold-blue">M.</span><span style="display:inline-block; width: 12px;"></span>
+      contacto@avancexpress.com.mx<br>
+      <span class="tx-bold-purple">T.</span><span style="display:inline-block; width: 15px;"></span> 01 (938) 131 4749
+    </p>
+  </div>
+  <div class="col-md-4 text-right">
+    <img src="http://avancexpress.com.mx/assets/images/icon-min.png" width="20%">
+
+  </div>
+</div>
+
+
+</body>
+</html>
+
