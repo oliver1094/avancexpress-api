@@ -1,6 +1,6 @@
 class Api::V1::ClientsController < ApplicationController
 
-  before_action :doorkeeper_authorize!, :except => [:create_pdff, :preregister, :get_client, :register]
+  before_action :doorkeeper_authorize!, :except => [:create_pdf, :preregister, :get_client, :register]
 
   def index
     @clients = Client.order(created_at: :desc)
