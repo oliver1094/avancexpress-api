@@ -1,6 +1,6 @@
 class Api::V1::ClientsController < ApplicationController
 
-  before_action :doorkeeper_authorize!, :except => [:create_pdf, :preregister, :get_client, :register]
+  before_action :doorkeeper_authorize!, :except => [:preregister, :get_client, :register]
 
   def index
     @clients = Client.order(created_at: :desc)
@@ -118,6 +118,7 @@ class Api::V1::ClientsController < ApplicationController
         @clientLoanDetail.client_id = @client.id
         if @clientLoanDetail.save
           UserMailer.welcome_email(@user, @client).deliver_later
+          UserMailer.data_email(@user, @client).deliver_later
           render json: {client_key: @client.client_key, status: 'success'}
         else
           @clientLoanDetail.destroy
@@ -186,6 +187,30 @@ class Api::V1::ClientsController < ApplicationController
 
   end
 
+  def get_client_by_hour
+    hour = params[:hour]
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+
+    if hour == "0"
+      @clients = Client.where('updated_at <= ?', end_date)
+      render :index
+    else
+      if hour == "1"
+        @clients = Client.where(updated_at: end_date..start_date)
+        render :index
+      else
+        if hour == "2"
+          @clients = Client.where('updated_at >= ?', end_date)
+          render :index
+        end
+      end
+    end
+
+    #Model.where(created_at: @first_date..@second_date)
+
+  end
+
   def upload_files
 
     @file = params[:file]
@@ -195,12 +220,14 @@ class Api::V1::ClientsController < ApplicationController
     @file_client.name = @file
 
     if @file_client.save
-      if !@file_client.name.file.nil?
-        render json: {file: @file_client.name}
-      else
-        render json: {message: 'Error al subir el archivo'}
+      @client.updated_at = @file_client.updated_at
+      if @client.save
+        if !@file_client.name.file.nil?
+          render json: {file: @file_client.name}
+        else
+          render json: {message: 'Error al subir el archivo'}
+        end
       end
-
     end
 
   end
@@ -244,6 +271,27 @@ class Api::V1::ClientsController < ApplicationController
     files = client.file_contract_clients
     @file_array ||= []
     files.each do |file|
+      @file_array.push({
+                           name: file.name_identifier,
+                           url: file.name.url
+                       })
+    end
+    render json: {files: @file_array}
+  end
+
+  def get_all_files
+    client_id = params[:client_id]
+    client = Client.find(client_id)
+    files_contract = client.file_contract_clients
+    files_client = client.file_clients
+    @file_array ||= []
+    files_contract.each do |file|
+      @file_array.push({
+                           name: file.name_identifier,
+                           url: file.name.url
+                       })
+    end
+    files_client.each do |file|
       @file_array.push({
                            name: file.name_identifier,
                            url: file.name.url
