@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: one
+  company_name: MyString
+  puesto: MyString
+  salario_r: MyString
+  gasto_mensual: 9.99
+  contract_type: MyString
+  salario_mensual: 9.99
+  fecha_init: 2018-02-13
+
+two:
+  client: two
+  company_name: MyString
+  puesto: MyString
+  salario_r: MyString
+  gasto_mensual: 9.99
+  contract_type: MyString
+  salario_mensual: 9.99
+  fecha_init: 2018-02-13

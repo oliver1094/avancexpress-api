@@ -1,6 +1,8 @@
 class Api::V1::ClientsController < ApplicationController
 
-  before_action :doorkeeper_authorize!, :except => [:preregister, :get_client, :register]
+  before_action :doorkeeper_authorize!, :except => [:preregister, :get_client, :register,
+                                                    :register_laboral, :register_personal,
+                                                    :upload_files, :get_client_files]
 
   def index
     @clients = Client.order(created_at: :desc)
@@ -137,6 +139,36 @@ class Api::V1::ClientsController < ApplicationController
     end
   end
 
+  def register_personal
+    @client_key = params[:client_key]
+    @data = params[:data]
+    @client = Client.find_by_client_key(@client_key)
+    params = @data
+    params.permit!
+    @client_personal = ClientPersonal.new(params)
+    @client_personal.client_id = @client.id
+    if @client_personal.save
+      render json: {status: true}
+    else
+      render json: {status: false, errors: @client_personal.errors}
+    end
+  end
+
+  def register_laboral
+    @client_key = params[:client_key]
+    @data = params[:data]
+    @client = Client.find_by_client_key(@client_key)
+    params = @data
+    params.permit!
+    @client_laboral = ClientLaboral.new(params)
+    @client_laboral.client_id = @client.id
+    if @client_laboral.save
+      render json: {status: true}
+    else
+      render json: {status: false, errors: @client_personal.errors}
+    end
+  end
+
   def register
     @client_key = params[:client_key]
     @data = params[:data]
@@ -180,7 +212,19 @@ class Api::V1::ClientsController < ApplicationController
     @client_key = params[:client_key]
     @client = Client.find_by_client_key(@client_key)
     if @client
-      render json: {client: @client, email: @client.user.email}
+      if @client.client_personal
+        if @client.client_laboral
+          render json: {client: @client, client_personal: @client.client_personal,
+                        client_laboral: @client.client_laboral, email: @client.user.email}
+        else
+          render json: {client: @client, client_personal: @client.client_personal,
+                        email: @client.user.email}
+        end
+
+      else
+        render json: {client: @client, email: @client.user.email}
+      end
+
     else
       render json: {message: 'Error'}
     end
@@ -214,7 +258,7 @@ class Api::V1::ClientsController < ApplicationController
   def upload_files
 
     @file = params[:file]
-    @client = Client.find(params[:client_id])
+    @client = Client.find_by_client_key(params[:client_key])
     @file_client = FileClient.new
     @file_client.client_id = @client.id
     @file_client.name = @file
@@ -252,8 +296,8 @@ class Api::V1::ClientsController < ApplicationController
   end
 
   def get_client_files
-    client_id = params[:client_id]
-    client = Client.find(client_id)
+    client_key = params[:client_key]
+    client = Client.find_by_client_key(client_key)
     files = client.file_clients
     @file_array ||= []
     files.each do |file|

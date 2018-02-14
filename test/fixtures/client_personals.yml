@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: one
+  sex: MyString
+  phone: MyString
+  cp: MyString
+  city: MyString
+  civil_state: MyString
+  home_type: MyString
+  plan_type: MyString
+  birth_date: MyString
+  rfc: MyString
+  home_num: MyString
+  state: MyString
+  colonia: MyString
+  dependent: MyString
+  company_phone: MyString
+  is_credit_card: false
+  is_credit_hip: false
+  is_credit_auto: false
+  is_buro: false
+
+two:
+  client: two
+  sex: MyString
+  phone: MyString
+  cp: MyString
+  city: MyString
+  civil_state: MyString
+  home_type: MyString
+  plan_type: MyString
+  birth_date: MyString
+  rfc: MyString
+  home_num: MyString
+  state: MyString
+  colonia: MyString
+  dependent: MyString
+  company_phone: MyString
+  is_credit_card: false
+  is_credit_hip: false
+  is_credit_auto: false
+  is_buro: false

@@ -21,6 +21,7 @@ json.clients @clients do |client|
     json.loan_detail client.client_loan_detail
     json.address client.address_client
     json.files client.file_clients do |file|
+      json.id file.id
       json.name file.name_identifier
       json.url file.name_url
     end

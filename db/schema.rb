@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211203137) do
+ActiveRecord::Schema.define(version: 20180214034443) do
 
   create_table "address_clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "street_number"
@@ -25,6 +25,20 @@ ActiveRecord::Schema.define(version: 20171211203137) do
     t.index ["client_id"], name: "index_address_clients_on_client_id"
   end
 
+  create_table "client_laborals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint "client_id"
+    t.string "company_name"
+    t.string "puesto"
+    t.string "salario_r"
+    t.decimal "gasto_mensual", precision: 10
+    t.string "contract_type"
+    t.decimal "salario_mensual", precision: 10
+    t.date "fecha_init"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_client_laborals_on_client_id"
+  end
+
   create_table "client_loan_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.date "payment_date"
     t.decimal "before_nomina", precision: 10, scale: 2
@@ -37,6 +51,32 @@ ActiveRecord::Schema.define(version: 20171211203137) do
     t.datetime "updated_at", null: false
     t.date "request_date"
     t.index ["client_id"], name: "index_client_loan_details_on_client_id"
+  end
+
+  create_table "client_personals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint "client_id"
+    t.string "sex"
+    t.string "phone"
+    t.string "cp"
+    t.string "city"
+    t.string "civil_state"
+    t.string "home_type"
+    t.string "plan_type"
+    t.string "birth_date"
+    t.string "rfc"
+    t.string "home_num"
+    t.string "state"
+    t.string "colonia"
+    t.string "dependent"
+    t.string "company_phone"
+    t.boolean "is_credit_card"
+    t.boolean "is_credit_hip"
+    t.boolean "is_credit_auto"
+    t.boolean "is_buro"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "curp"
+    t.index ["client_id"], name: "index_client_personals_on_client_id"
   end
 
   create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -145,7 +185,9 @@ ActiveRecord::Schema.define(version: 20171211203137) do
   end
 
   add_foreign_key "address_clients", "clients"
+  add_foreign_key "client_laborals", "clients"
   add_foreign_key "client_loan_details", "clients"
+  add_foreign_key "client_personals", "clients"
   add_foreign_key "clients", "users"
   add_foreign_key "file_clients", "clients"
   add_foreign_key "file_contract_clients", "clients"

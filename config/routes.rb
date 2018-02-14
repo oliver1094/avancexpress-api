@@ -18,6 +18,8 @@ Rails.application.routes.draw do
           get 'get_client' => 'clients#get_client'
           post 'preregister' => 'clients#preregister'
           post 'register' => 'clients#register'
+          post 'register_personal' => 'clients#register_personal'
+          post 'register_laboral' => 'clients#register_laboral'
           post 'upload_contract_files' => 'clients#upload_contract_files'
           post 'upload_files' => 'clients#upload_files'
           get 'get_client_files' => 'clients#get_client_files'
