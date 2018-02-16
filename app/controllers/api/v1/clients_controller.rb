@@ -332,13 +332,15 @@ class Api::V1::ClientsController < ApplicationController
     files_contract.each do |file|
       @file_array.push({
                            name: file.name_identifier,
-                           url: file.name.url
+                           url: file.name.url,
+                           isIfe: false
                        })
     end
     files_client.each do |file|
       @file_array.push({
                            name: file.name_identifier,
-                           url: file.name.url
+                           url: file.name.url,
+                           isIfe: file.isIfe
                        })
     end
     render json: {files: @file_array}
@@ -399,17 +401,39 @@ class Api::V1::ClientsController < ApplicationController
     client_id = params[:client_id]
     client = Client.find(client_id)
     if status
-      client.status = 'accepted';
+      client.val_four = true
     else
-      client.val_third = false;
-      client.val_second = false;
-      client.val_first = false;
-      client.status = 'rejected';
+      client.val_third = false
+      client.val_second = false
+      client.val_first = false
     end
 
     if client.save
       render json: {
           status: true
+      }
+    end
+  end
+
+  def validation_five
+    status = params[:status]
+    client_id = params[:client_id]
+    @client = Client.find(client_id)
+    @user = @client.user
+    if status
+      @client.status = 'accepted'
+      @user.is_active = 1
+    else
+      @client.val_third = false
+      @client.val_second = false
+      @client.val_first = false
+      @client.val_four = false
+      @client.status = 'rejected'
+    end
+
+    if @client.save && @user.save
+      render json: {
+          status: @user
       }
     end
 
@@ -432,24 +456,31 @@ class Api::V1::ClientsController < ApplicationController
   def change_status_loan
     status = params[:status]
     client_id = params[:client_id]
+    ife = params[:ife]
+    fileClient = FileClient.find(ife[:ife])
     client = Client.find(client_id)
-    client_address = AddressClient.find_by_client_id(client_id)
+    client_personal = ClientPersonal.find_by_client_id(client_id)
+    client_laboral = ClientLaboral.find_by_client_id(client_id)
     client_loan = ClientLoanDetail.find_by_client_id(client_id)
     if status
       client.val_first = true
       data_general = params[:client_general]
       data_general.permit!
       client.update(data_general)
-      data_address = params[:address_client]
-      data_address.permit!
+      data_personal = params[:client_personal]
+      data_personal.permit!
+      data_laboral = params[:client_laboral]
+      data_laboral.permit!
       data_loan = params[:loan_detail]
       data_loan.permit!
-      client_address.update(data_address)
+      client_laboral.update(data_laboral)
+      client_personal.update(data_personal)
       client_loan.update(data_loan)
+      fileClient.isIfe = 1
     else
       client.val_first = false
     end
-    if client.save && client_loan.save && client_address.save
+    if client.save && client_loan.save && client_personal.save && client_laboral.save && fileClient.save
       create_pdf(client)
       render json: {
           status: true

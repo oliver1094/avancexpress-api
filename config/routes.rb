@@ -32,6 +32,7 @@ Rails.application.routes.draw do
           post 'validation_second' => 'clients#validation_second'
           post 'validation_third' => 'clients#validation_third'
           post 'validation_four' => 'clients#validation_four'
+          post 'validation_five' => 'clients#validation_five'
           get 'create_pdff' => 'clients#create_pdff'
         end
       end

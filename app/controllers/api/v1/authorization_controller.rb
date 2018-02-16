@@ -1,6 +1,6 @@
 class Api::V1::AuthorizationController < ApplicationController
 
-  before_action :doorkeeper_authorize!, :except => [:login]
+  before_action :doorkeeper_authorize!, :except => [:login, :logout]
   def index
     render :json => {user: 1}
   end

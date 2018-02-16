@@ -6,6 +6,7 @@ json.clients @clients do |client|
     json.val_first client.val_first
     json.val_second client.val_second
     json.val_third client.val_third
+    json.val_four client.val_four
     json.user client.user
     json.name_two client.name_two
     json.last_name_two client.last_name_two
@@ -19,7 +20,8 @@ json.clients @clients do |client|
     json.phone client.phone
     json.monto client.monto
     json.loan_detail client.client_loan_detail
-    json.address client.address_client
+    json.laboral client.client_laboral
+    json.personal client.client_personal
     json.files client.file_clients do |file|
       json.id file.id
       json.name file.name_identifier
