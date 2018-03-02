@@ -271,6 +271,8 @@ class Api::V1::ClientsController < ApplicationController
         else
           render json: {message: 'Error al subir el archivo'}
         end
+      else
+        render json: {message: 'Error al subir el archivo'}
       end
     end
 
